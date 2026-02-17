@@ -1,0 +1,11 @@
+tensorflow
+mediapipe
+opencv-python
+numpy
+pandas
+scikit-learn
+matplotlib
+jupyter
+pillow
+arabic-reshaper
+python-bidi

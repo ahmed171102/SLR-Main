@@ -1,2 +1,42 @@
-*.rar
-*.csv
+# General
+__pycache__/
+*.py[cod]
+*$py.class
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Python
+venv/
+env/
+.env
+.ipynb_checkpoints/
+build/
+dist/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints
+
+# Node/Web
+node_modules/
+npm-debug.log
+yarn-error.log
+.next/
+dist/
+build/
+
+# Large Files & Datasets (Git LFS recommended for these)
+# *.h5
+# *.tflite
+# *.csv
+# *.rar
+# *.zip
+# *.mp4
+# *.avi
+
+# Specific large files
+# Uncomment if you want to exclude them, or use Git LFS
+# asl_mediapipe_keypoints_dataset.csv
