@@ -1,0 +1,13 @@
+tensorflow
+mediapipe
+opencv-python
+numpy
+pandas
+scikit-learn
+matplotlib
+jupyter
+
+# Arabic text rendering (used by Arabic guide utilities)
+pillow
+arabic-reshaper
+python-bidi

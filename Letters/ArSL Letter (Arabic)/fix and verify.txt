@@ -1,0 +1,66 @@
+import pandas as pd
+import numpy as np
+import os
+
+# ==========================================
+# CONFIGURATION
+# ==========================================
+# We start with your fixed file (columns are correct, but might miss 'nothing')
+INPUT_FILE = r"M:\Term 9\Grad\Main\Sign-Language-Recognition-System-main\Sign-Language-Recognition-System-main\Sign_to_Sentence Project Main\ArSL Letter (Arabic)\arabic_fixed_with_nothing.csv"
+OUTPUT_FILE = "arabic_final_training_data.csv"
+
+print(f"🚀 Starting Fix & Verify Process...")
+
+# 1. Load the dataset
+if not os.path.exists(INPUT_FILE):
+    print(f"❌ ERROR: Could not find '{INPUT_FILE}'.")
+    print("   Make sure you ran the previous column-repair script.")
+else:
+    df = pd.read_csv(INPUT_FILE)
+    print(f"   Loaded: {len(df)} rows.")
+
+    # 2. Fix: Add 'nothing' if missing
+    if 'nothing' not in df['label'].unique():
+        print("🔧 Class 'nothing' is MISSING. Adding it now...")
+        
+        # Create 300 rows of zeros
+        new_data = []
+        feature_cols = [c for c in df.columns if c != 'label']
+        for _ in range(300):
+            row = {'label': 'nothing'}
+            for col in feature_cols:
+                row[col] = 0.0
+            new_data.append(row)
+            
+        df_nothing = pd.DataFrame(new_data)
+        df = pd.concat([df, df_nothing], ignore_index=True)
+        print(f"   ✅ Added 300 samples for 'nothing'.")
+    else:
+        print("✅ Class 'nothing' is already present.")
+
+    # 3. Save the final file
+    # Shuffle first
+    df = df.sample(frac=1).reset_index(drop=True)
+    df.to_csv(OUTPUT_FILE, index=False)
+    print(f"💾 Saved final dataset to: {OUTPUT_FILE}")
+
+    # 4. VERIFY: Display all classes
+    print("\n" + "="*40)
+    print("👀 FINAL CLASS LIST (CHECK THIS):")
+    print("="*40)
+    
+    classes = sorted(df['label'].unique())
+    print(f"Total Classes: {len(classes)}")
+    print("-" * 20)
+    print(classes)
+    print("-" * 20)
+    
+    # Final check
+    required = ['space', 'del', 'nothing']
+    missing = [x for x in required if x not in classes]
+    
+    if len(missing) == 0:
+        print("🎉 STATUS: PERFECT. Ready for training.")
+        print(f"👉 Set CSV_PATH = '{OUTPUT_FILE}' in your notebook.")
+    else:
+        print(f"❌ STATUS: INCOMPLETE. Still missing: {missing}")
