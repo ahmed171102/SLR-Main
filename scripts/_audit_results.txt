@@ -1,0 +1,58 @@
+path|size_kb|cells|purpose|architecture|dataset
+wlasl-data.ipynb|18.6|25|dataset-analysis|none|WLASL
+Base Repo\Sign-Language-Recognition-System-main\Sign_to_Sentence Project Main\ArSL Letter (Arabic)\CBN-CPU.ipynb|8.4|4|model-training|CNN-based|ArSL-Letter (Arabic Sign Language)
+Base Repo\Sign-Language-Recognition-System-main\Sign_to_Sentence Project Main\ArSL Letter (Arabic)\fixer notebook.ipynb|15.7|1|data-fixing/cleaning|none|ArSL-Letter (Arabic Sign Language)
+Base Repo\Sign-Language-Recognition-System-main\Sign_to_Sentence Project Main\ArSL Letter (Arabic)\Mediapipe_Final_Arabic.ipynb|69.7|18|unknown|MobileNetV2+LSTM+Transformer|ArSL-Letter (Arabic Sign Language)
+Base Repo\Sign-Language-Recognition-System-main\Sign_to_Sentence Project Main\ArSL Letter (Arabic)\Mediapipe_Optimized_Training.ipynb|12.3|9|model-training|MLP (MediaPipe)|ASL-Letter (Kaggle alphabet)
+Base Repo\Sign-Language-Recognition-System-main\Sign_to_Sentence Project Main\ArSL Letter (Arabic)\Mediapipe_Training.ipynb|36.9|18|model-training|MLP (MediaPipe)|ASL-Letter (Kaggle alphabet)
+Base Repo\Sign-Language-Recognition-System-main\Sign_to_Sentence Project Main\ArSL Letter (Arabic)\Mediapipe_Training_GPU_Optimized.ipynb|14.0|12|model-training|MLP (MediaPipe)|ASL-Letter (Kaggle alphabet)
+Base Repo\Sign-Language-Recognition-System-main\Sign_to_Sentence Project Main\ArSL Letter (Arabic)\Mobilenet-arabic-optimized.ipynb|17.9|16|unknown|MobileNetV2|ArSL-Letter (Arabic Sign Language)
+Base Repo\Sign-Language-Recognition-System-main\Sign_to_Sentence Project Main\ArSL Letter (Arabic)\Mobilenet-arabic.ipynb|60.1|33|unknown|MobileNetV2|ASL-Letter (Kaggle alphabet)
+Base Repo\Sign-Language-Recognition-System-main\Sign_to_Sentence Project Main\ArSL Letter (Arabic)\MobileNetV2_Mediapipe_Style_Training.ipynb|7.1|9|live-test/inference|MobileNetV2|ArSL-Letter (Arabic Sign Language)
+Base Repo\Sign-Language-Recognition-System-main\Sign_to_Sentence Project Main\ASL Letter (English)\MBV2_draft - Copy.ipynb|0.4|0|draft/exploration|none|ASL-Letter (Kaggle alphabet)
+Gradution Current Project\Sign-Language-Recognition-System-main\Sign-Language-Recognition-System-main\Sign_to_Sentence Project\Combined_Architecture.ipynb|64.4|26|combined-architecture|MobileNetV2|unknown
+Gradution Current Project\Sign-Language-Recognition-System-main\Sign-Language-Recognition-System-main\Sign_to_Sentence Project\MBV2_draft.ipynb|12.2|17|draft/exploration|MobileNetV2|ASL-Letter (Kaggle alphabet)
+Gradution Current Project\Sign-Language-Recognition-System-main\Sign-Language-Recognition-System-main\Sign_to_Sentence Project\mediapipe_draft.ipynb|5.4|2|draft/exploration|MLP (MediaPipe)|ASL-Letter (Kaggle alphabet)
+Gradution Current Project\Sign-Language-Recognition-System-main\Sign-Language-Recognition-System-main\Sign_to_Sentence Project\Mediapipe_Training.ipynb|6436.5|13|model-training|MLP (MediaPipe)|ASL-Letter (Kaggle alphabet)
+Gradution Current Project\Sign-Language-Recognition-System-main\Sign-Language-Recognition-System-main\Sign_to_Sentence Project\MobileNetV2_Training.ipynb|884.0|29|model-training|MobileNetV2|ASL-Letter (Kaggle alphabet)
+Gradution Current Project\Sign-Language-Recognition-System-main\Sign-Language-Recognition-System-main\Sign_to_Sentence Project\Untitled-1.ipynb|7.7|2|unknown|none|unknown
+Optimized Letters camera repo\AR-ASL-GRAD_PROJ-main\eng-words-model.ipynb|626.7|7|model-training|LSTM|WLASL/ASL-Word
+Optimized Letters camera repo\AR-ASL-GRAD_PROJ-main\AR-ASL-GRAD_PROJ-main\Combined_Architecture.ipynb|42.5|33|combined-architecture|MobileNetV2|ASL-Letter (Kaggle alphabet)
+Optimized Letters camera repo\AR-ASL-GRAD_PROJ-main\AR-ASL-GRAD_PROJ-main\Core_arch.ipynb|17.1|7|combined-architecture|MLP (MediaPipe)|ASL-Letter (Kaggle alphabet)
+Optimized Letters camera repo\AR-ASL-GRAD_PROJ-main\AR-ASL-GRAD_PROJ-main\eng-words-model.ipynb|626.7|7|model-training|LSTM|WLASL/ASL-Word
+Optimized Letters camera repo\AR-ASL-GRAD_PROJ-main\AR-ASL-GRAD_PROJ-main\Mediapipe_Training.ipynb|12851.5|15|model-training|MLP (MediaPipe)|ASL-Letter (Kaggle alphabet)
+Optimized Letters camera repo\AR-ASL-GRAD_PROJ-main\AR-ASL-GRAD_PROJ-main\MobileNetV2_Training.ipynb|860.1|29|model-training|MobileNetV2|ASL-Letter (Kaggle alphabet)
+SLR Main\Letters\ArSL Letter (Arabic)\CBN-CPU.ipynb|8.4|4|model-training|CNN-based|ArSL-Letter (Arabic Sign Language)
+SLR Main\Letters\ArSL Letter (Arabic)\fixer notebook.ipynb|15.7|1|data-fixing/cleaning|none|ArSL-Letter (Arabic Sign Language)
+SLR Main\Letters\ArSL Letter (Arabic)\Mediapipe_Final_Arabic.ipynb|72.2|18|unknown|MobileNetV2+LSTM+Transformer|ArSL-Letter (Arabic Sign Language)
+SLR Main\Letters\ArSL Letter (Arabic)\Mediapipe_Optimized_Training.ipynb|12.3|9|model-training|MLP (MediaPipe)|ASL-Letter (Kaggle alphabet)
+SLR Main\Letters\ArSL Letter (Arabic)\Mediapipe_Training.ipynb|36.9|18|model-training|MLP (MediaPipe)|ASL-Letter (Kaggle alphabet)
+SLR Main\Letters\ArSL Letter (Arabic)\Mediapipe_Training_GPU_Optimized.ipynb|14.0|12|model-training|MLP (MediaPipe)|ASL-Letter (Kaggle alphabet)
+SLR Main\Letters\ArSL Letter (Arabic)\Mobilenet-arabic-optimized.ipynb|17.9|16|unknown|MobileNetV2|ArSL-Letter (Arabic Sign Language)
+SLR Main\Letters\ArSL Letter (Arabic)\Mobilenet-arabic.ipynb|60.1|33|unknown|MobileNetV2|ASL-Letter (Kaggle alphabet)
+SLR Main\Letters\ArSL Letter (Arabic)\MobileNetV2_Mediapipe_Style_Training.ipynb|7.1|9|live-test/inference|MobileNetV2|ArSL-Letter (Arabic Sign Language)
+SLR Main\Letters\ArSL Letter (Arabic)\MobileNetV2_Training.ipynb|884.8|29|model-training|MobileNetV2|ASL-Letter (Kaggle alphabet)
+SLR Main\Letters\ArSL Letter (Arabic)\Final Notebooks\Combined_Architecture_Arabic_GPU.ipynb|44.3|24|live-test/inference|MobileNetV2|ArSL-Letter (Arabic Sign Language)
+SLR Main\Letters\ArSL Letter (Arabic)\Final Notebooks\Mediapipe_Final_Arabic1.ipynb|78.6|19|unknown|MobileNetV2+LSTM+Transformer|ArSL-Letter (Arabic Sign Language)
+SLR Main\Letters\ArSL Letter (Arabic)\Final Notebooks\Mobilenet_Arabic_Best_Final.ipynb|483.6|33|unknown|MobileNetV2|ArSL-Letter (Arabic Sign Language)
+SLR Main\Letters\ASL Letter (English)\Combined_Architecture.ipynb|47.3|25|live-test/inference|MobileNetV2|ASL-Letter (Kaggle alphabet)
+SLR Main\Letters\ASL Letter (English)\MBV2_draft - Copy.ipynb|0.4|0|draft/exploration|none|ASL-Letter (Kaggle alphabet)
+SLR Main\Letters\ASL Letter (English)\MBV2_draft.ipynb|2297.4|26|draft/exploration|MobileNetV2|ASL-Letter (Kaggle alphabet)
+SLR Main\Letters\ASL Letter (English)\mediapipe_draft.ipynb|6.8|7|draft/exploration|MobileNetV2|ASL-Letter (Kaggle alphabet)
+SLR Main\Letters\ASL Letter (English)\Mediapipe_Training.ipynb|42.6|18|model-training|MLP (MediaPipe)|ASL-Letter (Kaggle alphabet)
+SLR Main\Letters\ASL Letter (English)\MobileNetV2_Training.ipynb|33.0|37|model-training|MobileNetV2|ASL-Letter (Kaggle alphabet)
+SLR Main\Letters\Guides\MobileNetV2_Training.ipynb|884.8|29|model-training|MobileNetV2|ASL-Letter (Kaggle alphabet)
+SLR Main\Letters\Orignal Notebooks\Combined_Architecture.ipynb|64.4|26|combined-architecture|MobileNetV2|unknown
+SLR Main\Letters\Orignal Notebooks\Mediapipe_Training.ipynb|6436.5|13|model-training|MLP (MediaPipe)|ASL-Letter (Kaggle alphabet)
+SLR Main\Letters\Orignal Notebooks\MobileNetV2_Training.ipynb|884.8|29|model-training|MobileNetV2|ASL-Letter (Kaggle alphabet)
+SLR Main\Words\ArSL Word (Arabic)\ArSL_Word_Live_Test.ipynb|25.2|7|live-test/inference|LSTM|ArSL-Word (KArSL/custom)
+SLR Main\Words\ArSL Word (Arabic)\ArSL_Word_Training.ipynb|66.4|13|model-training|LSTM|ArSL-Word (KArSL/custom)
+SLR Main\Words\ArSL Word (Arabic)\ArSL_Word_Training_Kaggle.ipynb|56.0|13|model-training|LSTM|ArSL-Word (KArSL Kaggle)
+SLR Main\Words\ArSL Word (Arabic)\Dataset Downloading Notebook.ipynb|2.3|1|dataset-download|none|ArSL-Word (KArSL/custom)
+SLR Main\Words\ASL Word (English)\asl-words-trial-1.ipynb|1180.2|12|experimental-trial|LSTM|WLASL/ASL-Word
+SLR Main\Words\ASL Word (English)\asl-words-v2-transformer.ipynb|70.8|13|unknown|LSTM+Transformer|WLASL/ASL-Word
+SLR Main\Words\ASL Word (English)\ASL_Word_Live_Test.ipynb|34.1|7|live-test/inference|LSTM|WLASL/ASL-Word
+SLR Main\Words\ASL Word (English)\ASL_Word_Training 1.ipynb|1108.8|13|model-training|LSTM|WLASL/ASL-Word
+SLR Main\Words\ASL Word (English)\ASL_Word_Training.ipynb|1109.2|13|model-training|LSTM|WLASL/ASL-Word
+SLR Main\Words\ASL Word (English)\ASL_Word_Training_Kaggle.ipynb|53.5|12|model-training|LSTM|WLASL/ASL-Word (Kaggle)
+SLR Main\Words\Shared\Merge_Vocab.ipynb|11.0|8|data-merging/vocab|none|ArSL-Word (KArSL/custom)

@@ -1,0 +1,19 @@
+﻿SLR Main\Letters\ArSL Letter (Arabic)\Final Notebooks\arsl_mediapipe_mlp_model_final.h5|2.2
+SLR Main\Letters\ArSL Letter (Arabic)\Final Notebooks\mobilenet_arabic_final.h5|18.1
+SLR Main\Letters\ArSL Letter (Arabic)\arsl_mediapipe_mlp_model_best.h5|2.2
+SLR Main\Letters\ArSL Letter (Arabic)\best_model_initial_optimized.h5|18.3
+SLR Main\Letters\ArSL Letter (Arabic)\mobilenet_arabic_best_finetuned.h5|18.1
+SLR Main\Letters\ArSL Letter (Arabic)\mobilenet_arabic_best_initial.h5|18.1
+SLR Main\Letters\ASL Letter (English)\asl_mediapipe_mlp_model.h5|0.2
+SLR Main\Letters\ASL Letter (English)\best_model_finetuned.h5|31.2
+SLR Main\Letters\ASL Letter (English)\best_model_initial.h5|18.2
+SLR Main\Letters\ASL Letter (English)\best_model_initial_optimized.h5|18.2
+SLR Main\Letters\ASL Letter (English)\sign_language_model_MobileNetV2.h5|22.2
+SLR Main\Letters\ASL Letter (English)\sign_language_model_MobileNetV2_updated.h5|31.2
+SLR Main\Words\ASL Word (English)\asl_word_lstm_model_best.h5|3.4
+SLR Main\Words\ASL Word (English)\asl_word_lstm_model_final.h5|3.4
+Base Repo\Sign-Language-Recognition-System-main\Sign_to_Sentence Project Main\ArSL Letter (Arabic)\arsl_mediapipe_mlp_model_best.h5|2.2
+Optimized Letters camera repo\AR-ASL-GRAD_PROJ-main\AR-ASL-GRAD_PROJ-main\asl_mediapipe_mlp_model.h5|0.2
+Optimized Letters camera repo\AR-ASL-GRAD_PROJ-main\AR-ASL-GRAD_PROJ-main\sign_language_model_MobileNetV2.h5|22.2
+Gradution Current Project\Sign-Language-Recognition-System-main\Sign-Language-Recognition-System-main\Sign_to_Sentence Project\asl_mediapipe_mlp_model.h5|0.2
+Gradution Current Project\Sign-Language-Recognition-System-main\Sign-Language-Recognition-System-main\Sign_to_Sentence Project\sign_language_model_MobileNetV2.h5|22.2

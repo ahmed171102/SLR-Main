@@ -1,0 +1,56 @@
+﻿Base Repo\Sign-Language-Recognition-System-main\Sign_to_Sentence Project Main\ArSL Letter (Arabic)\CBN-CPU.ipynb|4
+Base Repo\Sign-Language-Recognition-System-main\Sign_to_Sentence Project Main\ArSL Letter (Arabic)\fixer notebook.ipynb|1
+Base Repo\Sign-Language-Recognition-System-main\Sign_to_Sentence Project Main\ArSL Letter (Arabic)\Mediapipe_Final_Arabic.ipynb|18
+Base Repo\Sign-Language-Recognition-System-main\Sign_to_Sentence Project Main\ArSL Letter (Arabic)\Mediapipe_Optimized_Training.ipynb|9
+Base Repo\Sign-Language-Recognition-System-main\Sign_to_Sentence Project Main\ArSL Letter (Arabic)\Mediapipe_Training.ipynb|18
+Base Repo\Sign-Language-Recognition-System-main\Sign_to_Sentence Project Main\ArSL Letter (Arabic)\Mediapipe_Training_GPU_Optimized.ipynb|12
+Base Repo\Sign-Language-Recognition-System-main\Sign_to_Sentence Project Main\ArSL Letter (Arabic)\Mobilenet-arabic-optimized.ipynb|16
+Base Repo\Sign-Language-Recognition-System-main\Sign_to_Sentence Project Main\ArSL Letter (Arabic)\Mobilenet-arabic.ipynb|33
+Base Repo\Sign-Language-Recognition-System-main\Sign_to_Sentence Project Main\ArSL Letter (Arabic)\MobileNetV2_Mediapipe_Style_Training.ipynb|9
+Base Repo\Sign-Language-Recognition-System-main\Sign_to_Sentence Project Main\ASL Letter (English)\MBV2_draft - Copy.ipynb|0
+Gradution Current Project\Sign-Language-Recognition-System-main\Sign-Language-Recognition-System-main\Sign_to_Sentence Project\Combined_Architecture.ipynb|26
+Gradution Current Project\Sign-Language-Recognition-System-main\Sign-Language-Recognition-System-main\Sign_to_Sentence Project\MBV2_draft.ipynb|17
+Gradution Current Project\Sign-Language-Recognition-System-main\Sign-Language-Recognition-System-main\Sign_to_Sentence Project\mediapipe_draft.ipynb|2
+Gradution Current Project\Sign-Language-Recognition-System-main\Sign-Language-Recognition-System-main\Sign_to_Sentence Project\Mediapipe_Training.ipynb|13
+Gradution Current Project\Sign-Language-Recognition-System-main\Sign-Language-Recognition-System-main\Sign_to_Sentence Project\MobileNetV2_Training.ipynb|29
+Gradution Current Project\Sign-Language-Recognition-System-main\Sign-Language-Recognition-System-main\Sign_to_Sentence Project\Untitled-1.ipynb|2
+Optimized Letters camera repo\AR-ASL-GRAD_PROJ-main\AR-ASL-GRAD_PROJ-main\Combined_Architecture.ipynb|33
+Optimized Letters camera repo\AR-ASL-GRAD_PROJ-main\AR-ASL-GRAD_PROJ-main\Core_arch.ipynb|7
+Optimized Letters camera repo\AR-ASL-GRAD_PROJ-main\AR-ASL-GRAD_PROJ-main\eng-words-model.ipynb|7
+Optimized Letters camera repo\AR-ASL-GRAD_PROJ-main\AR-ASL-GRAD_PROJ-main\Mediapipe_Training.ipynb|15
+Optimized Letters camera repo\AR-ASL-GRAD_PROJ-main\AR-ASL-GRAD_PROJ-main\MobileNetV2_Training.ipynb|29
+Optimized Letters camera repo\AR-ASL-GRAD_PROJ-main\eng-words-model.ipynb|7
+SLR Main\Letters\ArSL Letter (Arabic)\Final Notebooks\Combined_Architecture_Arabic_GPU.ipynb|24
+SLR Main\Letters\ArSL Letter (Arabic)\Final Notebooks\Mediapipe_Final_Arabic1.ipynb|19
+SLR Main\Letters\ArSL Letter (Arabic)\Final Notebooks\Mobilenet_Arabic_Best_Final.ipynb|33
+SLR Main\Letters\ArSL Letter (Arabic)\CBN-CPU.ipynb|4
+SLR Main\Letters\ArSL Letter (Arabic)\fixer notebook.ipynb|1
+SLR Main\Letters\ArSL Letter (Arabic)\Mediapipe_Final_Arabic.ipynb|18
+SLR Main\Letters\ArSL Letter (Arabic)\Mediapipe_Optimized_Training.ipynb|9
+SLR Main\Letters\ArSL Letter (Arabic)\Mediapipe_Training.ipynb|18
+SLR Main\Letters\ArSL Letter (Arabic)\Mediapipe_Training_GPU_Optimized.ipynb|12
+SLR Main\Letters\ArSL Letter (Arabic)\Mobilenet-arabic-optimized.ipynb|16
+SLR Main\Letters\ArSL Letter (Arabic)\Mobilenet-arabic.ipynb|33
+SLR Main\Letters\ArSL Letter (Arabic)\MobileNetV2_Mediapipe_Style_Training.ipynb|9
+SLR Main\Letters\ArSL Letter (Arabic)\MobileNetV2_Training.ipynb|29
+SLR Main\Letters\ASL Letter (English)\Combined_Architecture.ipynb|25
+SLR Main\Letters\ASL Letter (English)\MBV2_draft - Copy.ipynb|0
+SLR Main\Letters\ASL Letter (English)\MBV2_draft.ipynb|26
+SLR Main\Letters\ASL Letter (English)\mediapipe_draft.ipynb|7
+SLR Main\Letters\ASL Letter (English)\Mediapipe_Training.ipynb|18
+SLR Main\Letters\ASL Letter (English)\MobileNetV2_Training.ipynb|37
+SLR Main\Letters\Guides\MobileNetV2_Training.ipynb|29
+SLR Main\Letters\Orignal Notebooks\Combined_Architecture.ipynb|26
+SLR Main\Letters\Orignal Notebooks\Mediapipe_Training.ipynb|13
+SLR Main\Letters\Orignal Notebooks\MobileNetV2_Training.ipynb|29
+SLR Main\Words\ArSL Word (Arabic)\ArSL_Word_Live_Test.ipynb|7
+SLR Main\Words\ArSL Word (Arabic)\ArSL_Word_Training.ipynb|13
+SLR Main\Words\ArSL Word (Arabic)\ArSL_Word_Training_Kaggle.ipynb|13
+SLR Main\Words\ArSL Word (Arabic)\Dataset Downloading Notebook.ipynb|1
+SLR Main\Words\ASL Word (English)\asl-words-trial-1.ipynb|12
+SLR Main\Words\ASL Word (English)\asl-words-v2-transformer.ipynb|13
+SLR Main\Words\ASL Word (English)\ASL_Word_Live_Test.ipynb|7
+SLR Main\Words\ASL Word (English)\ASL_Word_Training 1.ipynb|13
+SLR Main\Words\ASL Word (English)\ASL_Word_Training.ipynb|13
+SLR Main\Words\ASL Word (English)\ASL_Word_Training_Kaggle.ipynb|12
+SLR Main\Words\Shared\Merge_Vocab.ipynb|8
