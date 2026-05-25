@@ -1,0 +1,48 @@
+% =============================================================================
+\chapter{Conclusion}
+\label{ch:conclusion}
+% =============================================================================
+
+\section{Summary of Achievements}
+\label{sec:conc:ach}
+
+This project successfully designed, trained, evaluated, and deployed
+\emph{Eshara}, a real-time bilingual \gls{asl}/\gls{arsl} recognition
+system covering letter-level and word-level signs. Four deep models were
+trained: two \gls{mlp}s for letters and two recurrent models for words
+(one \gls{bilstm} with custom temporal attention for \gls{asl},
+one stacked Bi-/Uni-\gls{lstm} with TimeDistributed spatial encoder for
+\gls{arsl}). The models were exposed through a FastAPI backend with
+both \gls{rest} and \gls{ws} endpoints, fronted by a React web client and
+a React-Native (Expo) mobile client; user accounts and chat are handled
+by a separate Node.js service. The system is containerised with Docker
+and deployed to Railway (backend) and Vercel (web).
+
+\section{Contributions to the Field}
+\label{sec:conc:contrib}
+
+The four contributions stated in \cref{sec:intro:contributions} were
+realised and quantitatively validated:
+\begin{itemize}
+  \item \textbf{C-1} The unified bilingual pipeline is delivered as
+        an open-source repository.
+  \item \textbf{C-2} The ArSL Word v2 architecture outperforms a
+        hands-only \gls{bilstm} baseline on \gls{karsl}-502
+        (see \cref{tab:ablate}).
+  \item \textbf{C-3} The custom \texttt{TemporalAttention} layer
+        provides a measurable Top-5 gain at $<\,1$\,\% parameter cost
+        (\cref{tab:ablate}).
+  \item \textbf{C-4} The mobile client runs \gls{tflite} models on-device
+        at $\geq 25$~\gls{fps} with a model footprint $\leq 5$~MB each
+        (\cref{tab:rt}).
+\end{itemize}
+
+\section{Practical Impact}
+\label{sec:conc:impact}
+
+The most direct beneficiaries are deaf and hard-of-hearing Arabic
+speakers, who gain a free, open, and bidirectional communication aid.
+The system has potential application in special-needs education,
+telemedicine, public-service kiosks, and customer service. As an
+open-source release, it also lowers the entry barrier for future
+\gls{arsl} research.

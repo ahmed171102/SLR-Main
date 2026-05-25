@@ -1,0 +1,79 @@
+% =============================================================================
+\chapter{Discussion}
+\label{ch:discussion}
+% =============================================================================
+
+\section{Interpretation of the Results}
+\label{sec:disc:interpret}
+
+The results in \cref{ch:results} confirm the central hypothesis of this
+work: a hands-and-pose landmark representation combined with a deep
+temporal model is sufficient to discriminate hundreds of word-level signs
+in both \gls{asl} and \gls{arsl} without resorting to heavy 3-D CNNs. The
+biggest individual gains come from (a) extending the sequence window
+from 30 to 48 frames and (b) augmenting hands with the 33-landmark pose,
+both of which carry strong body-anchor information for signs such as
+\emph{house}, \emph{I}, or \emph{you}.
+
+\section{Strengths}
+\label{sec:disc:strengths}
+
+\begin{itemize}
+  \item The unified pipeline minimises the engineering surface --- one
+        feature extractor feeds two language pairs and two granularity
+        levels.
+  \item The custom \texttt{TemporalAttention} layer is trivially small
+        ($<\,1$\,\% parameters) yet contributes measurable Top-5 gains
+        (\cref{tab:ablate}).
+  \item The system is genuinely deployed --- not a notebook demo --- and
+        usable from a browser and a phone.
+\end{itemize}
+
+\section{Failure Cases and Limitations}
+\label{sec:disc:limits}
+
+The most common failure modes observed are:
+
+\begin{enumerate}
+  \item Visually similar Arabic letters (e.g.\ \textarabic{ك}~vs~\textarabic{ل},
+        \textarabic{د}~vs~\textarabic{ذ}, \textarabic{ر}~vs~\textarabic{ز}).
+  \item Strong overhead lighting that hides depth information.
+  \item Camera distance beyond \SI{1.5}{\metre} where MediaPipe loses
+        finger landmarks.
+  \item Very low signer counts in \gls{karsl}-502 (3 signers, 8 reps each)
+        limit signer-independent generalisation.
+  \item MX150 VRAM caps batch size at 32, slowing experimentation.
+\end{enumerate}
+
+\section{Comparison with Existing Bilingual SLR}
+\label{sec:disc:cmp}
+
+Most prior systems target a single language or only one recognition level.
+By covering two languages and two levels in one deployable system, this
+work offers a baseline for future bilingual research; the numbers in
+\cref{tab:cmp} are competitive despite the small training-time GPU.
+
+\section{Engineering Trade-Offs}
+\label{sec:disc:trade}
+
+\begin{table}[H]\centering
+  \caption{Key engineering trade-offs in the system.}\label{tab:trade}
+  \begin{tabularx}{\textwidth}{l l X}\toprule
+    Trade-off                       & Choice           & Justification \\\midrule
+    Cloud vs on-device              & Both             & Privacy + reach \\
+    Browser MP vs server MP         & Browser          & Privacy + bandwidth \\
+    BiLSTM vs Transformer           & BiLSTM           & VRAM, simpler, cuDNN-fast \\
+    \texttt{.h5} vs SavedModel      & \texttt{.h5}     & Smaller, Keras-native \\\bottomrule
+  \end{tabularx}
+\end{table}
+
+\section{Ethical, Social, and Environmental Considerations}
+\label{sec:disc:ethics}
+
+The datasets used are gender- and dialect-biased (e.g.\ \gls{karsl}'s
+three signers are male Saudi nationals); generalisation to female or
+Levantine/Egyptian signers must be validated separately. The on-device
+\gls{tflite} option protects user privacy by removing the need to upload
+raw video. Approximate energy footprint of training (Kaggle P100 + MX150)
+is $\approx XX$~kWh, equivalent to $\approx X$ flights of length
+\SI{500}{\kilo\metre}.

@@ -1,0 +1,22 @@
+flowchart LR
+  subgraph Client
+    CAM[Camera] --> MP[MediaPipe Hands/Pose]
+    MP --> FE[Feature vector<br/>63-D or 258-D]
+  end
+  subgraph Backend [Python FastAPI]
+    FE -->|WebSocket| ROUTER[Mode Detector]
+    ROUTER -->|stillness| LET[Letter MLP<br/>ASL or ArSL]
+    ROUTER -->|motion| WORD[Word BiLSTM<br/>ASL or ArSL]
+    LET --> DEC1[Letter-Stream Decoder]
+    WORD --> DEC2[Word Decoder]
+    DEC1 --> RESP[JSON response]
+    DEC2 --> RESP
+  end
+  subgraph UI
+    RESP --> WEB[React Web App]
+    RESP --> MOB[React Native App]
+  end
+  subgraph Auth [Node Express]
+    WEB <-->|JWT| AUTH[Auth and Chat]
+    MOB <-->|JWT| AUTH
+  end

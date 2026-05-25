@@ -1,0 +1,7 @@
+flowchart LR
+  IN[Input 30 x 63] --> BL1[BiLSTM 128 return_seq]
+  BL1 --> BL2[BiLSTM 64 return_seq]
+  BL2 --> ATT[TemporalAttention]
+  ATT --> D1[Dense 128 ReLU]
+  D1 --> DP[Dropout 0.4]
+  DP --> OUT[Dense 157 Softmax]

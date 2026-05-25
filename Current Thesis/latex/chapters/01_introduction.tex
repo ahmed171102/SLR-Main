@@ -1,0 +1,143 @@
+% =============================================================================
+\chapter{Introduction}
+\label{ch:introduction}
+% =============================================================================
+
+\section{Background and Motivation}
+\label{sec:intro:background}
+
+According to the World Health Organization, approximately \num{466000000}
+people worldwide live with disabling hearing loss, and around 7~million of
+these reside in the Arab region~\cite{who2024hearing}. Sign language is the
+first language of most deaf individuals; in the Arab world, this is
+\gls{arsl}. Unlike spoken languages, \gls{arsl} is a visual--spatial
+language with grammar in three dimensions, and is therefore not a
+one-to-one mapping of spoken Arabic.
+
+% TODO: Figure 1-1 — pie chart of hearing-impaired population by region.
+% \begin{figure}[H]\centering\includegraphics[width=0.6\textwidth]{fig_1-1_hearing_loss.png}
+% \caption{Estimated hearing-impaired population by region (WHO, 2024).}
+% \label{fig:hearing_loss}\end{figure}
+
+Automated \gls{slr} promises \num{24}-hour, scalable accessibility that
+human interpretation cannot match in cost or availability. It is therefore
+particularly valuable for education, telemedicine, customer service, and
+public-service kiosks.
+
+\section{Problem Statement}
+\label{sec:intro:problem}
+
+Given a continuous RGB video stream from a single uncalibrated camera, the
+system must automatically recognise either (a)~the letter being
+finger-spelled per frame, or (b)~the isolated word being signed across a
+1--\SI{2}{\second} window, in either \gls{asl} or \gls{arsl}, with
+end-to-end latency below \SI{200}{\milli\second}. The interface must run
+in a standard web browser and on a commodity Android phone.
+
+\section{Aim and Objectives}
+\label{sec:intro:objectives}
+
+The aim of this project is to design, train, evaluate, and deploy a
+real-time bilingual \gls{asl}/\gls{arsl} recognition system covering both
+letters and words.
+
+The specific objectives are:
+\begin{enumerate}
+  \item Curate four datasets covering two languages and two recognition
+        levels.
+  \item Extract 21- and 33-landmark vectors using Google MediaPipe.
+  \item Train four deep models: two MLPs (letters), one BiLSTM with
+        temporal attention, and one stacked BiLSTM--LSTM model with a
+        TimeDistributed spatial encoder.
+  \item Quantise the four models to \gls{tflite} for on-device inference
+        (each $\leq$ \SI{10}{\mega\byte}).
+  \item Implement a FastAPI backend exposing both \gls{rest} and \gls{ws}
+        endpoints.
+  \item Implement a React web client that performs MediaPipe hand
+        detection in the browser.
+  \item Implement a React-Native + Expo mobile client with offline mode.
+  \item Evaluate accuracy (Top-1, Top-5, macro-F1), latency, frame rate,
+        and conduct a small user study.
+\end{enumerate}
+
+\section{Scope and Limitations}
+\label{sec:intro:scope}
+
+The system covers static finger-spelling, isolated-word recognition,
+real-time inference, two languages (\gls{asl} and \gls{arsl}), a single
+signer with a single RGB camera, and both single-handed and two-handed
+signs. It does \emph{not} cover continuous sign-language translation
+(planned as future work), grammar parsing, depth or sEMG sensors,
+multi-signer scene analysis, or sign languages other than \gls{asl} and
+\gls{arsl}.
+
+\section{Engineering Standards and Design Considerations}
+\label{sec:intro:standards}
+
+The system follows the following standards and best practices:
+
+\begin{itemize}
+  \item HTTP/1.1 (RFC~9110) for \gls{rest} endpoints~\cite{rfc9110}.
+  \item WebSocket (RFC~6455) for streaming inference~\cite{rfc6455}.
+  \item HTTPS / TLS~1.3 for transport security.
+  \item W3C WCAG~2.1~AA for web accessibility with ARIA roles.
+  \item ISO/IEC~25010:2011 software-quality model
+        (functional suitability, performance efficiency, usability,
+        reliability, security, maintainability, portability).
+  \item TensorFlow SavedModel and \gls{tflite} formats for model
+        portability~\cite{tflite}.
+  \item OpenAPI~3.1 for machine-readable API documentation.
+  \item JWT (RFC~7519) for stateless authentication.
+\end{itemize}
+
+\section{Constraints}
+\label{sec:intro:constraints}
+
+The system was designed under the following constraints:
+
+\begin{description}
+  \item[Economic] Free-tier cloud (Railway 500\,h/month, Vercel hobby plan).
+  \item[Hardware] Training on an NVIDIA MX150 (2\,GB VRAM) with Kaggle P100
+        used for bigger runs.
+  \item[Data] \gls{karsl}-502 provides only $\approx 8$ samples per class
+        --- severe data scarcity for word recognition.
+  \item[Time] One academic year (October to June).
+  \item[Ethical] Signers' video data used only with the consent established
+        by the dataset creators.
+  \item[Privacy] On-device option for users who cannot upload video.
+  \item[Environmental] Lightweight models reduce energy footprint.
+\end{description}
+
+\section{Research Contributions}
+\label{sec:intro:contributions}
+
+This work makes four contributions:
+
+\begin{enumerate}
+  \item[\textbf{C-1}] \textbf{Bilingual unified pipeline.} The first
+        open-source \gls{asl}+\gls{arsl} letters+words system with a single
+        inference backend.
+  \item[\textbf{C-2}] \textbf{ArSL-Word~v2 architecture.} A TimeDistributed
+        spatial encoder followed by two \gls{bilstm}s and an \gls{lstm},
+        trained on a 258-D pose-and-hands feature vector, that outperforms
+        a hands-only \gls{bilstm} baseline on \gls{karsl}-502.
+  \item[\textbf{C-3}] \textbf{Custom \texttt{TemporalAttention} layer.} An
+        additive attention re-implemented for TensorFlow~2.10 that adds
+        \textless~1\,\% parameters and improves Top-5 \gls{asl}-word
+        accuracy.
+  \item[\textbf{C-4}] \textbf{Deployed cross-platform product.}
+        Demonstrates that the trained models are usable on a phone
+        (\gls{tflite}, $\approx 5$\,MB each, $\geq 25$\,\gls{fps}) and a
+        browser (server inference, $\leq 150$\,ms round-trip).
+\end{enumerate}
+
+\section{Thesis Organisation}
+\label{sec:intro:organisation}
+
+\Cref{ch:literature} reviews related work; \cref{ch:methodology} presents
+datasets, feature extraction, and the four model architectures;
+\cref{ch:implementation} details the backend, web, mobile, and
+deployment stacks; \cref{ch:results} presents accuracy, ablation, and
+real-time performance results; \cref{ch:discussion} interprets the
+findings; \cref{ch:conclusion} summarises contributions; and
+\cref{ch:future} outlines future research directions.

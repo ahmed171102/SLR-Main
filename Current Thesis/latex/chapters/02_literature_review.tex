@@ -1,0 +1,161 @@
+% =============================================================================
+\chapter{Literature Review}
+\label{ch:literature}
+% =============================================================================
+
+\section{History of Sign-Language Recognition}
+\label{sec:lit:history}
+
+% TODO: Insert Figure 2-1 — timeline of SLR
+\begin{figure}[H]\centering
+  \includegraphics[width=0.95\textwidth]{fig_2-1_slr_timeline.png}
+  \caption{A brief history of sign-language recognition.}
+  \label{fig:slr_history}
+\end{figure}
+
+Sign-language recognition has evolved from glove-based sensors
+(CyberGlove, 1990s) through Hidden Markov Models on RGB video, to
+present-day landmark-based deep models such as those built on
+MediaPipe~\cite{zhang2020mediapipe}.
+
+\section{Computer Vision Approaches}
+\label{sec:lit:cv}
+
+\subsection{Image-Classification CNNs}
+\label{sec:lit:cnn}
+
+MobileNetV2~\cite{sandler2018mobilenetv2} introduces inverted residual
+blocks with a linear bottleneck, allowing efficient image classification
+on mobile devices. EfficientNet~\cite{tan2019efficientnet} extends this
+with compound scaling, while ResNet~\cite{he2016deep} popularised
+residual connections.
+
+\subsection{Keypoint and Skeleton Methods}
+\label{sec:lit:keypoints}
+
+MediaPipe Hands~\cite{zhang2020mediapipe} uses a two-stage detector and
+regressor to produce 21~3-D landmarks per hand at over 30~\gls{fps} on
+mobile devices. MediaPipe Pose / BlazePose~\cite{bazarevsky2020blazepose}
+produces 33~landmarks per body. OpenPose~\cite{cao2019openpose} provides
+25 keypoints via part-affinity fields but is heavier.
+
+\subsection{Hybrid CNN--RNN Approaches}
+\label{sec:lit:hybrid}
+
+Cam{g\"{o}}z et al.~\cite{camgoz2018neural} introduced Neural Sign-Language
+Translation, combining CNN visual features with a \gls{bilstm}--attention
+decoder. Koller et al.~\cite{koller2020weakly} demonstrated
+weakly-supervised continuous \gls{slr}.
+
+\section{Deep-Learning Architectures}
+\label{sec:lit:dl}
+
+\subsection{Multi-Layer Perceptron}
+\label{sec:lit:mlp}
+
+The forward pass of layer $\ell$ is
+\begin{equation}
+  h^{(\ell)} = \sigma\!\left( W^{(\ell)} h^{(\ell-1)} + b^{(\ell)} \right),
+  \qquad \sigma(x) = \max(0,x).
+\end{equation}
+
+\subsection{LSTM Cell}
+\label{sec:lit:lstm}
+
+The \gls{lstm} cell~\cite{hochreiter1997long} maintains a cell state $c_t$
+and hidden state $h_t$ via input, forget, and output gates:
+\begin{equation}
+\begin{aligned}
+  i_t &= \sigma(W_i x_t + U_i h_{t-1} + b_i) \\
+  f_t &= \sigma(W_f x_t + U_f h_{t-1} + b_f) \\
+  o_t &= \sigma(W_o x_t + U_o h_{t-1} + b_o) \\
+  \tilde c_t &= \tanh(W_c x_t + U_c h_{t-1} + b_c) \\
+  c_t &= f_t \odot c_{t-1} + i_t \odot \tilde c_t \\
+  h_t &= o_t \odot \tanh(c_t)
+\end{aligned}
+\end{equation}
+
+The \gls{bilstm}~\cite{schuster1997bidirectional} processes a sequence in
+both directions and concatenates the hidden states:
+\begin{equation}
+  h_t = \bigl[\, \overrightarrow{h}_t \,;\, \overleftarrow{h}_t \,\bigr].
+\end{equation}
+
+\subsection{Attention Mechanisms}
+\label{sec:lit:attention}
+
+Additive attention~\cite{bahdanau2015neural}, on which our custom
+\texttt{TemporalAttention} layer is based, computes
+\begin{equation}
+  e_t = \tanh(W h_t + b),\qquad
+  \alpha_t = \frac{\exp(e_t)}{\sum_{t'=1}^{T} \exp(e_{t'})},\qquad
+  c = \sum_{t=1}^{T} \alpha_t h_t.
+\end{equation}
+
+Multi-head self-attention~\cite{vaswani2017attention} extends this to
+multiple subspaces:
+\begin{equation}
+  \mathrm{Attn}(Q,K,V) = \mathrm{softmax}\!\left(\frac{Q K^\top}{\sqrt{d_k}}\right) V .
+\end{equation}
+
+\section{Pose-Estimation Frameworks}
+\label{sec:lit:pose}
+
+\begin{table}[H]\centering
+  \caption{Comparison of pose-estimation frameworks.}\label{tab:pose}
+  \begin{tabularx}{\textwidth}{l c c c X}\toprule
+    Framework & Landmarks & FPS (CPU) & Browser & Used in this work \\\midrule
+    MediaPipe Hands   & 21/hand & 30+ & Yes  & Yes \\
+    MediaPipe Pose    & 33      & 25+ & Yes  & Yes (words v2) \\
+    MediaPipe Holistic & 543    & 18  & Yes  & Trial only \\
+    OpenPose          & 25      & 8   & No   & Compared \\
+    MoveNet           & 17      & 40+ & Yes  & Compared \\\bottomrule
+  \end{tabularx}
+\end{table}
+
+\section{Existing Datasets}
+\label{sec:lit:datasets}
+
+\begin{table}[H]\centering
+  \caption{Sign-language datasets considered in this work.}\label{tab:datasets}
+  \begin{tabularx}{\textwidth}{l c c r r X}\toprule
+    Dataset & Language & Type & Classes & Samples & Used? \\\midrule
+    ASL Alphabet (Akash, Kaggle) & ASL  & Images & 29   & 87\,000  & Yes \\
+    ArASL2018                    & ArSL & Images & 32   & 54\,049  & Yes \\
+    WLASL-2000~\cite{li2020wlasl}& ASL  & Videos & 2000 & 21\,000  & Subset (157) \\
+    KArSL-502~\cite{sidig2021karsl}& ArSL & Videos & 502  & 24\,000  & Yes \\
+    How2Sign~\cite{duarte2021how2sign}& ASL & Continuous & --- & 80\,h & Future work \\\bottomrule
+  \end{tabularx}
+\end{table}
+
+\section{Bilingual SLR Literature}
+\label{sec:lit:bilingual}
+
+Most published \gls{slr} systems target a single language. The few
+bilingual systems documented to date focus on English plus a single
+Latin-script second language. To the author's knowledge, no
+open-source bilingual system covering both \gls{asl} and \gls{arsl}, and
+both letters and words, exists prior to \emph{Eshara}.
+
+\section{Real-Time Deployment}
+\label{sec:lit:deploy}
+
+The literature contains numerous laboratory demonstrations of \gls{slr},
+but rarely a phone-deployable or browser-deployable end-to-end system.
+\gls{ws}-based streaming inference, while industrial practice, is
+under-represented in \gls{slr} publications.
+
+\section{Research Gap}
+\label{sec:lit:gap}
+
+\begin{table}[H]\centering
+  \caption{Gaps in the literature addressed by \emph{Eshara}.}\label{tab:gap}
+  \begin{tabularx}{\textwidth}{X X}\toprule
+    Gap in literature & How \emph{Eshara} closes it \\\midrule
+    ArSL is under-researched & 4\textsuperscript{th} model trained on KArSL-502. \\
+    Most systems do letters \emph{or} words & Eshara does both, with a mode detector. \\
+    Few systems are deployable on mobile & Expo + TFLite app (offline). \\
+    Few systems are open source & Full repository released. \\
+    Bilingual systems rarely include Arabic & Two of four models are Arabic. \\\bottomrule
+  \end{tabularx}
+\end{table}

@@ -1,0 +1,12 @@
+sequenceDiagram
+  participant U as User
+  participant FE as React
+  participant API as Node API
+  U->>FE: email + password
+  FE->>API: POST /auth/login
+  API->>API: bcrypt.compare
+  API-->>FE: { token, user }
+  FE->>FE: store token
+  FE->>API: GET /me (Bearer token)
+  API->>API: verifyJWT
+  API-->>FE: user profile

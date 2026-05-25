@@ -1,0 +1,7 @@
+flowchart TD
+  RAW[Raw .mp4 or .jpg] --> READ[OpenCV read]
+  READ --> SAMPLE[Uniform frame sample<br/>to fixed T]
+  SAMPLE --> MP2[MediaPipe Holistic / Hands]
+  MP2 --> NORM[Wrist-centre + scale normalise]
+  NORM --> VEC[Concatenate Pose + LH + RH<br/>= 258 features]
+  VEC --> CACHE[Save .npz cache]

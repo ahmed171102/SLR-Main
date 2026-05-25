@@ -1,0 +1,10 @@
+flowchart TD
+  IN[Input 48 x 258] --> TD1[TimeDistributed Dense 192 ReLU + BN]
+  TD1 --> TD2[TimeDistributed Dropout 0.2]
+  TD2 --> TD3[TimeDistributed Dense 128 ReLU + BN]
+  TD3 --> BL1[BiLSTM 128 return_seq + BN + SpatialDropout 0.4]
+  BL1 --> BL2[BiLSTM 96 return_seq + BN + SpatialDropout 0.4]
+  BL2 --> LS3[LSTM 64 last-state + BN + Dropout 0.4]
+  LS3 --> DE1[Dense 384 ReLU + BN + Dropout 0.4]
+  DE1 --> DE2[Dense 192 ReLU + Dropout 0.2]
+  DE2 --> OUT[Dense num_classes Softmax]

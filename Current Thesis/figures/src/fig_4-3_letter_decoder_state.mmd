@@ -1,0 +1,7 @@
+stateDiagram-v2
+  [*] --> IDLE
+  IDLE --> CANDIDATE: new label, conf >= tau
+  CANDIDATE --> COMMITTED: same label for >= K frames
+  COMMITTED --> COOLDOWN: append to sentence
+  COOLDOWN --> IDLE: after N frames with low motion
+  CANDIDATE --> IDLE: confidence drop or label switch

@@ -1,0 +1,6 @@
+flowchart LR
+  IN[Input 63] --> D1[Dense 256 ReLU]
+  D1 --> DP1[Dropout 0.3]
+  DP1 --> D2[Dense 128 ReLU]
+  D2 --> DP2[Dropout 0.3]
+  DP2 --> OUT[Dense 29 Softmax]

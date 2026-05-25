@@ -1,0 +1,243 @@
+% =============================================================================
+\chapter{Methodology and System Design}
+\label{ch:methodology}
+% =============================================================================
+
+\section{High-Level System Architecture}
+\label{sec:meth:arch}
+
+\begin{figure}[H]\centering
+  \includegraphics[width=0.95\textwidth]{fig_3-1_system_architecture.png}
+  \caption{High-level system architecture --- camera $\rightarrow$ MediaPipe $\rightarrow$ mode detector $\rightarrow$ letter / word model $\rightarrow$ decoder $\rightarrow$ web / mobile UI.}
+  \label{fig:arch}
+\end{figure}
+
+The system is organised in three loosely-coupled layers: the
+\emph{client} (browser or phone) extracts hand and pose landmarks via
+MediaPipe; the \emph{backend} (FastAPI) routes each frame through a
+motion-based mode detector to either the letter \gls{mlp} or the word
+\gls{bilstm}; and a separate \emph{auth/chat} service (Node.js + Prisma)
+manages user accounts and conversational features.
+
+\section{Datasets}
+\label{sec:meth:data}
+
+\begin{table}[H]\centering
+  \caption{Summary of the four datasets used in this work.}\label{tab:data}
+  \begin{tabularx}{\textwidth}{l c c r r X}\toprule
+    Dataset & Language & Type & Classes & Samples & License \\\midrule
+    ASL Alphabet & ASL  & Images & 29  & 87\,000   & CC0 \\
+    ArASL2018    & ArSL & Images & 32  & 54\,049   & Research \\
+    WLASL-157    & ASL  & Videos & 157 & $\approx$\,1\,700 & Research \\
+    KArSL-502    & ArSL & Videos & 502 & $\approx$\,24\,000 & Research \\\bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Preprocessing Pipeline}
+\label{sec:meth:preproc}
+
+\begin{figure}[H]\centering
+  \includegraphics[width=0.75\textwidth]{fig_3-2_preprocessing_pipeline.png}
+  \caption{Preprocessing pipeline from raw \texttt{.mp4} to cached \texttt{.npz}.}
+  \label{fig:preproc}
+\end{figure}
+
+\subsection{Data Augmentation}
+\label{sec:meth:augment}
+
+For each training sequence $x \in \mathbb{R}^{T \times F}$:
+\begin{enumerate}
+  \item \textbf{Gaussian noise:} $x \leftarrow x + \mathcal{N}(0, 0.005^2)$.
+  \item \textbf{Temporal shift:} $x \leftarrow \mathrm{roll}(x, k)$ with
+        $k \sim \mathrm{Uniform}\{-3,\dots,3\}$.
+  \item \textbf{Frame dropout:} random binary mask with
+        $\Pr(\text{keep}) = 0.9$.
+  \item \textbf{Random scale:} $x \leftarrow s\,x$ with
+        $s \sim \mathrm{Uniform}(0.9, 1.1)$.
+  \item \textbf{Horizontal flip:} swap the left-hand and right-hand
+        sub-blocks with probability $0.5$.
+\end{enumerate}
+
+\section{Feature Extraction}
+\label{sec:meth:features}
+
+\subsection{Letter Feature Vector (63-D)}
+For each frame, MediaPipe Hands returns 21~landmarks
+$(x_i, y_i, z_i)_{i=1}^{21}$. We wrist-centre and scale-normalise:
+\begin{equation}
+  \tilde x_i = x_i - x_0,\qquad
+  \tilde y_i = y_i - y_0,\qquad
+  \tilde z_i = z_i - z_0,
+\end{equation}
+giving a 63-dimensional feature vector per frame.
+
+\subsection{Word Feature Vector (258-D)}
+The word pipeline uses MediaPipe Holistic to produce a richer feature
+vector concatenating pose and both hands:
+\begin{equation}
+  F_{\text{word}} = \underbrace{33 \times 4}_{\text{pose (x,y,z,vis)}}
+                  + \underbrace{21 \times 3}_{\text{left hand}}
+                  + \underbrace{21 \times 3}_{\text{right hand}}
+                  = 258 .
+\end{equation}
+
+\subsection{Temporal Sampling}
+Letters use a single frame as input. ASL words use a 30-frame window;
+ArSL words use a longer 48-frame window to capture the full sign arc
+(KArSL clips average $\approx 2$~seconds).
+
+\section{Model 1 --- ASL Letter MLP}
+\label{sec:meth:m1}
+
+\begin{figure}[H]\centering
+  \includegraphics[width=0.85\textwidth]{fig_3-5_asl_letter_mlp.png}
+  \caption{ASL letter MLP architecture (input 63-D $\rightarrow$ 29 classes).}
+  \label{fig:m1}
+\end{figure}
+
+\begin{table}[H]\centering
+  \caption{Hyperparameters for the ASL letter MLP.}\label{tab:m1}
+  \begin{tabular}{l l}\toprule
+    Optimiser     & Adam, lr $= 10^{-3}$ \\
+    Loss          & Categorical cross-entropy \\
+    Batch size    & 64 \\
+    Epochs        & 50 with EarlyStopping (patience $= 8$) \\
+    Parameters    & $\approx 49\,000$ \\
+    Split         & 80\,/\,20 (train\,/\,val) \\\bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Model 2 --- ArSL Letter MLP}
+\label{sec:meth:m2}
+
+The same architecture as Model~1 is trained on ArASL2018 with 32~output
+classes. A horizontal flip is added during pre-processing because most
+\gls{arsl} signers use the right hand.
+
+\section{Model 3 --- ASL Word BiLSTM with Temporal Attention}
+\label{sec:meth:m3}
+
+\begin{figure}[H]\centering
+  \includegraphics[width=0.95\textwidth]{fig_3-6_asl_word_bilstm.png}
+  \caption{ASL word BiLSTM with custom \texttt{TemporalAttention} layer.}
+  \label{fig:m3}
+\end{figure}
+
+The custom \texttt{TemporalAttention} layer implements
+\cref{sec:lit:attention} as a single Keras layer of $O(d)$ parameters:
+
+\begin{lstlisting}[language=Python,caption={\texttt{TemporalAttention} Keras layer.},label={lst:tempatt}]
+class TemporalAttention(tf.keras.layers.Layer):
+    def build(self, input_shape):
+        self.W = self.add_weight('att_W',
+            shape=(input_shape[-1], 1),
+            initializer='glorot_uniform')
+        self.b = self.add_weight('att_b',
+            shape=(input_shape[1], 1),
+            initializer='zeros')
+
+    def call(self, x):
+        e = tf.nn.tanh(tf.matmul(x, self.W) + self.b)
+        a = tf.nn.softmax(e, axis=1)
+        return tf.reduce_sum(x * a, axis=1)
+\end{lstlisting}
+
+\section{Model 4 --- ArSL Word v2 (Improved Architecture)}
+\label{sec:meth:m4}
+
+\begin{figure}[H]\centering
+  \includegraphics[width=0.55\textwidth]{fig_3-7_arsl_word_v2.png}
+  \caption{ArSL word v2 architecture --- TimeDistributed spatial encoder $\rightarrow$ stacked BiLSTMs $\rightarrow$ LSTM $\rightarrow$ deep classifier head.}
+  \label{fig:m4}
+\end{figure}
+
+\begin{table}[H]\centering
+  \caption{Hyperparameters for the ArSL Word v2 model.}\label{tab:m4}
+  \begin{tabular}{l l}\toprule
+    Sequence length         & 48 frames \\
+    Feature dim             & 258 (Pose + L\,Hand + R\,Hand) \\
+    Batch size              & 32 \\
+    Optimiser               & Adam + Cosine-Annealing with warm restarts \\
+    Initial learning rate   & $5 \times 10^{-4}$ \\
+    Label smoothing $\varepsilon$ & 0.10 \\
+    Gradient clip-norm      & 1.0 \\
+    Dropout                 & 0.4 \\
+    L2 regularisation       & $10^{-4}$ \\
+    Class-weight clip       & $[0.5,\,10]$ \\\bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Cosine-Annealing with Warm Restarts}
+\label{sec:meth:cosine}
+
+The learning rate within each warm restart of length $T_i$ follows
+\begin{equation}
+  \eta_t = \eta_{\min} + \tfrac{1}{2}(\eta_{\max} - \eta_{\min})
+           \!\left(1 + \cos\!\left(\pi \tfrac{t}{T_i}\right)\right),
+  \label{eq:cosine}
+\end{equation}
+with $T_{\text{mul}} = 2.0$ (each cycle doubles) and $M_{\text{mul}} = 0.9$
+(amplitude shrinks 10\,\% per cycle)~\cite{loshchilov2017sgdr}.
+
+\subsection{Label-Smoothed Cross-Entropy}
+\label{sec:meth:smooth}
+
+\begin{equation}
+  \tilde y_k = (1-\varepsilon) y_k + \tfrac{\varepsilon}{K},\qquad
+  \mathcal{L} = -\sum_{k=1}^{K} \tilde y_k \log \hat y_k .
+  \label{eq:smooth}
+\end{equation}
+
+\section{Training Methodology}
+\label{sec:meth:train}
+
+\subsection{Adam Optimiser}
+\label{sec:meth:adam}
+Per-parameter update~\cite{kingma2015adam}:
+\begin{equation}
+\begin{aligned}
+  m_t &= \beta_1 m_{t-1} + (1-\beta_1) g_t \\
+  v_t &= \beta_2 v_{t-1} + (1-\beta_2) g_t^2 \\
+  \hat m_t &= \tfrac{m_t}{1 - \beta_1^t},\qquad
+  \hat v_t  = \tfrac{v_t}{1 - \beta_2^t} \\
+  \theta_t &= \theta_{t-1} - \eta\,\tfrac{\hat m_t}{\sqrt{\hat v_t} + \epsilon}
+\end{aligned}
+\end{equation}
+
+\subsection{Class-Weight Balancing}
+\label{sec:meth:weights}
+\begin{equation}
+  w_k = \operatorname{clip}\!\left(\tfrac{N}{K\,n_k},\;0.5,\;10\right),
+\end{equation}
+where $N$ is the total number of samples, $K$ the class count, and $n_k$
+the samples belonging to class $k$.
+
+\subsection{Train / Validation / Test Splits}
+\label{sec:meth:splits}
+\begin{itemize}
+  \item Letters: 80\,/\,20 random split.
+  \item Words: 60\,/\,20\,/\,20 stratified split; for \gls{karsl}-502
+        the split is \emph{signer-aware} --- signer~03 is held out as the
+        test set.
+\end{itemize}
+
+\section{Evaluation Metrics}
+\label{sec:meth:metrics}
+
+Per-class precision, recall, and F1 are defined as
+\begin{equation}
+  P_k = \tfrac{TP_k}{TP_k + FP_k},\quad
+  R_k = \tfrac{TP_k}{TP_k + FN_k},\quad
+  F1_k = \tfrac{2 P_k R_k}{P_k + R_k}.
+\end{equation}
+The macro-F1 is $F1_{\text{macro}} = \tfrac{1}{K}\sum_k F1_k$ and the
+Top-K accuracy is
+\begin{equation}
+  \operatorname{Top-K} = \tfrac{1}{N} \sum_{i=1}^{N}
+   \mathbb{1}\!\left[ y_i \in \operatorname{TopK}(\hat p_i) \right].
+\end{equation}
+End-to-end latency is decomposed as
+\begin{equation}
+  T_{\text{e2e}} = T_{\text{capture}} + T_{\text{MP}} + T_{\text{net}}
+                 + T_{\text{infer}} + T_{\text{render}}.
+\end{equation}

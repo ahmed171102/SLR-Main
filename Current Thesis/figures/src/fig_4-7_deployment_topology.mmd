@@ -1,0 +1,13 @@
+flowchart TB
+  subgraph Internet
+    USER[End user]
+  end
+  USER -- HTTPS --> CDN[Vercel CDN]
+  CDN --> WEB[React static bundle]
+  USER -- WSS --> API[Railway: FastAPI]
+  USER -- HTTPS --> AUTH[Railway: Node Express]
+  AUTH --> DB[(SQLite on volume)]
+  API --> MEM[Loaded .h5 models in RAM]
+  USER -- App store --> STORE[Play Store / TestFlight]
+  STORE --> APK[Expo APK or IPA]
+  APK -- offline --> TF[TFLite models bundled]

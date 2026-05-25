@@ -1,0 +1,28 @@
+% =============================================================================
+\chapter{Future Work}
+\label{ch:future}
+% =============================================================================
+
+Several promising directions remain:
+
+\begin{enumerate}
+  \item \textbf{Continuous \gls{slr}.} Extending the existing
+        \texttt{how2sign*.ipynb} prototypes to a full Transformer-based
+        sequence-to-sequence translator capable of recognising signed
+        sentences, not just isolated words.
+  \item \textbf{Larger Arabic vocabulary.} Augmenting \gls{karsl}-502
+        with dialect-specific corpora (Egyptian, Levantine, Maghrebi) and
+        cross-dialect adaptation.
+  \item \textbf{Quantisation-aware training.} Re-training the four models
+        with INT8 quantisation in the loop to further shrink the mobile
+        \gls{tflite} footprint and reduce inference latency.
+  \item \textbf{Bidirectional communication.} Pairing sign-to-text with
+        text-to-sign avatars (e.g.\ via a 3-D signer animated through
+        SMPL-X) to support full deaf--hearing conversation.
+  \item \textbf{Larger user study.} A formal study with deaf-community
+        partners across multiple Arab countries, using clinical
+        protocols and Standard SUS / NPS instruments.
+  \item \textbf{Cross-language transfer.} Pre-training the ArSL word
+        model on \gls{wlasl} representations and fine-tuning, exploiting
+        shared visual structure between sign languages.
+\end{enumerate}

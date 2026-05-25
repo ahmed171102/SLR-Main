@@ -1,0 +1,12 @@
+graph TD
+  A[App] --> R[Router]
+  R --> LP[LandingPage]
+  R --> Auth{ProtectedRoute}
+  Auth --> AP[AppHomePage]
+  AP --> RC[Recognize]
+  RC --> CAM[Camera]
+  RC --> HO[HandOverlay]
+  RC --> PD[PredictionDisplay]
+  RC --> SB[SentenceBuilder]
+  RC --> MI[ModeIndicator]
+  AP --> LT[LanguageToggle]

@@ -1,0 +1,86 @@
+% =============================================================================
+\chapter{Results and Evaluation}
+\label{ch:results}
+% =============================================================================
+
+\section{Letter-Recognition Results}
+\label{sec:res:letter}
+
+% TODO: Figure 5-1 — ASL letter training curves
+% TODO: Figure 5-2 — ASL letter confusion matrix (29x29)
+% TODO: Table 5-1 — ASL letter per-class P/R/F1
+
+\subsection{ASL Letter MLP}
+The ASL letter MLP achieves a top-1 accuracy of $XX.X\,\%$ and macro-F1
+of $X.XX$ on the held-out test set.
+
+\subsection{ArSL Letter MLP}
+The ArSL letter MLP achieves $XX.X\,\%$ top-1 / $X.XX$ macro-F1.
+
+\section{Word-Recognition Results}
+\label{sec:res:word}
+
+\subsection{ASL Word BiLSTM with Temporal Attention}
+$XX.X\,\%$ top-1 / $XX.X\,\%$ top-5 / $X.XX$ macro-F1 on 157 classes.
+
+\subsection{ArSL Word v2}
+$XX.X\,\%$ top-1 / $XX.X\,\%$ top-5 / $X.XX$ macro-F1 on KArSL-502.
+
+\section{Comparative Analysis}
+\label{sec:res:compare}
+
+\begin{table}[H]\centering
+  \caption{Comparison with prior work on the same tasks (placeholder ---
+           fill from your final runs).}\label{tab:cmp}
+  \begin{tabularx}{\textwidth}{X l l c c}\toprule
+    System & Language & Task & Top-1 (\%) & Top-5 (\%) \\\midrule
+    Sidig \emph{et al.}~\cite{sidig2021karsl} & ArSL & KArSL-502 word & XX & --- \\
+    Cam\\g{\"o}z \emph{et al.}~\cite{camgoz2018neural} & DGS & continuous & XX & --- \\
+    Eshara --- ArSL v2 (ours)                  & ArSL & KArSL-502 word & \textbf{XX} & \textbf{XX} \\
+    Eshara --- ASL Word (ours)                 & ASL  & WLASL-157      & \textbf{XX} & \textbf{XX} \\
+    Eshara --- ASL Letter (ours)               & ASL  & ASL Alphabet   & \textbf{XX} & --- \\
+    Eshara --- ArSL Letter (ours)              & ArSL & ArASL2018      & \textbf{XX} & --- \\\bottomrule
+  \end{tabularx}
+\end{table}
+
+\section{Ablation Studies}
+\label{sec:res:ablation}
+
+\begin{table}[H]\centering
+  \caption{Ablation studies on the ArSL Word v2 model.}\label{tab:ablate}
+  \begin{tabularx}{\textwidth}{X l l l}\toprule
+    Ablation                       & Setting              & Top-1 (\%) & $\Delta$ \\\midrule
+    Baseline                       & full v2 model        & XX & --- \\
+    Sequence length 30 (vs 48)     & shorter window       & XX & $-X$ \\
+    Hands-only (63-D)              & no pose features     & XX & $-X$ \\
+    No attention                   & remove MHA / TA      & XX & $-X$ \\
+    No spatial encoder             & direct BiLSTM        & XX & $-X$ \\
+    No augmentation                & augment off          & XX & $-X$ \\
+    No label smoothing             & $\varepsilon = 0$    & XX & $-X$ \\
+    No left/right flip             & flip removed         & XX & $-X$ \\\bottomrule
+  \end{tabularx}
+\end{table}
+
+\section{Real-Time Performance}
+\label{sec:res:rt}
+
+\begin{table}[H]\centering
+  \caption{Per-device end-to-end latency.}\label{tab:rt}
+  \begin{tabularx}{\textwidth}{X l l l}\toprule
+    Device                  & MP FPS & Inference (ms) & E2E latency (ms) \\\midrule
+    Desktop CPU (i7)        & 30 & 12 & 95  \\
+    Laptop GPU (MX150)      & 35 &  7 & 70  \\
+    Android (Snapdragon~7)  & 25 & 18 & 50 (offline) \\
+    Web $\rightarrow$ Railway & 28 & 15 & 130 \\\bottomrule
+  \end{tabularx}
+\end{table}
+
+\section{Usability Evaluation}
+\label{sec:res:sus}
+
+A small user study was conducted with 10 testers (5 deaf or hard-of-hearing,
+5 hearing). The 10-question System Usability Scale (SUS) yielded a mean
+score of $\bar{S} = XX/100$. Free-text comments were thematically grouped
+into the following themes: (i)~confidence display, (ii)~mode-switch
+visibility, (iii)~Arabic right-to-left layout, (iv)~camera framing
+guidance.

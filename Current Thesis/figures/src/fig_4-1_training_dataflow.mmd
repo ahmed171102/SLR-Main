@@ -1,0 +1,9 @@
+flowchart LR
+  RAW[KArSL .mp4 clips] --> MP[MediaPipe Holistic]
+  MP --> NORM[Normalise and concat 258-D]
+  NORM --> NPZ[.npz cache]
+  NPZ --> SPLIT[Stratified split 60 / 20 / 20]
+  SPLIT --> AUG[tf.data + augmentation]
+  AUG --> FIT[model.fit on GPU]
+  FIT --> CKPT[best.h5]
+  FIT --> CKPT2[final.h5]

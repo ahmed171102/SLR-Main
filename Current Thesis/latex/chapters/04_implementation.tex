@@ -1,0 +1,191 @@
+% =============================================================================
+\chapter{Implementation}
+\label{ch:implementation}
+% =============================================================================
+
+\section{Development Environment}
+\label{sec:impl:env}
+
+\begin{table}[H]\centering
+  \caption{Development environment inventory.}\label{tab:env}
+  \begin{tabularx}{\textwidth}{l X l X}\toprule
+    Layer       & Stack                                  & Version & Justification \\\midrule
+    OS (train)  & Windows 11 + WSL2 Ubuntu 22.04         & ---     & convenience \\
+    OS (cloud)  & Debian (Railway)                       & 12      & LTS, Docker \\
+    Python      & CPython                                & 3.9.x   & TF 2.10 cuDNN compatibility \\
+    TensorFlow  & TF + Keras                             & 2.10.0  & last MX150-compatible TF \\
+    CUDA/cuDNN  & ---                                     & 11.2 / 8.1 & matches TF 2.10 \\
+    MediaPipe   & mediapipe-python                       & 0.10.x  & latest stable \\
+    OpenCV      & opencv-python                          & 4.11.0  & MP4 decode \\
+    FastAPI     & fastapi                                & 0.104+  & async, OpenAPI \\
+    Uvicorn     & uvicorn                                & 0.24+   & ASGI server \\
+    Pydantic    & pydantic                               & v2      & strict schemas \\
+    Node.js     & LTS                                    & 20.x    & Prisma + Vite \\
+    React       & react / react-dom                      & 18.x    & concurrent \\
+    TypeScript  & typescript                             & 5.x     & types \\
+    Vite        & vite                                   & 5.x     & dev/bundle \\
+    Tailwind    & tailwindcss                            & 3.x     & utility CSS \\
+    Express     & express                                & 4.x     & auth/chat \\
+    Prisma      & prisma                                 & 5.x     & ORM/SQLite \\
+    Socket.IO   & socket.io                              & 4.x     & chat transport \\
+    Expo        & expo                                   & 50.x    & RN tooling \\
+    React Native& react-native                           & 0.73    & cross-platform \\
+    TFLite (RN) & react-native-tflite                    & 1.x     & on-device infer \\\bottomrule
+  \end{tabularx}
+\end{table}
+
+\section{Machine-Learning Pipeline}
+\label{sec:impl:ml}
+
+\begin{figure}[H]\centering
+  \includegraphics[width=0.95\textwidth]{fig_4-1_training_dataflow.png}
+  \caption{Training-time data flow from raw clips through \texttt{.npz} cache, augmentation, training, and checkpointing.}
+  \label{fig:trainflow}
+\end{figure}
+
+Each training run is encapsulated as a Jupyter notebook. The four primary
+notebooks are
+\texttt{Letters/ASL Letter (English)/Mediapipe\_Training.ipynb},
+\texttt{Letters/ArSL Letter (Arabic)/Mediapipe\_Optimized\_Training.ipynb},
+\texttt{Words/ASL Word (English)/ASL\_Word\_Training.ipynb}, and
+\texttt{Words/ArSL Word (Arabic)/ArSL\_Word\_Training\_v2.ipynb}.
+
+\section{Backend API (FastAPI)}
+\label{sec:impl:api}
+
+\subsection{Folder Layout}
+
+\begin{lstlisting}[language=,caption={Backend file layout.},label={lst:apilayout}]
+backend/
+  app/
+    main.py
+    config.py
+    models/
+      loader.py
+      letter_predictor.py
+      word_predictor.py
+      word_predictor_v2.py
+      mode_detector.py
+      letter_decoder.py
+      word_decoder.py
+    routes/
+      predict.py
+      websocket_route.py
+      health.py
+    schemas/
+      prediction_request.py
+      prediction_response.py
+      websocket_message.py
+  requirements.txt
+  Dockerfile
+  railway.toml
+\end{lstlisting}
+
+\subsection{REST Endpoints}
+
+\begin{table}[H]\centering
+  \caption{REST endpoints exposed by the FastAPI backend.}\label{tab:rest}
+  \begin{tabularx}{\textwidth}{l l X X}\toprule
+    Method & Path & Request & Response \\\midrule
+    GET  & \texttt{/health}          & ---                                & status JSON \\
+    POST & \texttt{/predict/letter}  & \texttt{\{landmarks: float[63], lang\}} & top-5 letters \\
+    POST & \texttt{/predict/word}    & \texttt{\{sequence: float[T][F], lang\}} & top-5 words \\
+    GET  & \texttt{/info}            & ---                                & model metadata \\\bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{WebSocket Protocol}
+
+\begin{figure}[H]\centering
+  \includegraphics[width=0.95\textwidth]{fig_4-2_websocket_sequence.png}
+  \caption{Browser $\leftrightarrow$ FastAPI WebSocket sequence.}
+  \label{fig:wsseq}
+\end{figure}
+
+\subsection{Letter-Stream Decoder}
+
+\begin{figure}[H]\centering
+  \includegraphics[width=0.85\textwidth]{fig_4-3_letter_decoder_state.png}
+  \caption{Letter-stream decoder state machine.}
+  \label{fig:letterdecoder}
+\end{figure}
+
+\subsection{Mode Detector}
+
+The mode detector switches between letter and word inference based on
+per-frame motion:
+\begin{equation}
+  m_t = \tfrac{1}{F}\sum_{f=1}^{F} \lvert x_{t,f} - x_{t-1,f} \rvert,
+  \label{eq:motion}
+\end{equation}
+and chooses letter mode when the running mean of $m_t$ falls below a
+threshold $\theta_1$ for $K_1$ consecutive frames.
+
+\section{Web Frontend (React)}
+\label{sec:impl:web}
+
+\begin{figure}[H]\centering
+  \includegraphics[width=0.95\textwidth]{fig_4-4_react_component_tree.png}
+  \caption{React component tree for the web client.}
+  \label{fig:reacttree}
+\end{figure}
+
+\section{Authentication and Chat (Node.js)}
+\label{sec:impl:auth}
+
+\begin{figure}[H]\centering
+  \includegraphics[width=0.95\textwidth]{fig_4-5_jwt_auth_flow.png}
+  \caption{JWT-based authentication flow.}
+  \label{fig:jwt}
+\end{figure}
+
+The Node.js layer manages user accounts, conversational chat (Socket.IO),
+and persistence via Prisma over SQLite (Postgres in production).
+
+\section{Mobile App (React Native + Expo + TFLite)}
+\label{sec:impl:mobile}
+
+\begin{figure}[H]\centering
+  \includegraphics[width=0.95\textwidth]{fig_4-6_mobile_inference.png}
+  \caption{Mobile on-device inference pipeline.}
+  \label{fig:mobile}
+\end{figure}
+
+\section{Deployment}
+\label{sec:impl:deploy}
+
+\begin{figure}[H]\centering
+  \includegraphics[width=0.95\textwidth]{fig_4-7_deployment_topology.png}
+  \caption{Deployment topology --- Vercel (web), Railway (backend), Expo (mobile).}
+  \label{fig:deploy}
+\end{figure}
+
+\subsection{Backend Dockerfile}
+
+\begin{lstlisting}[language=bash,caption={Backend Dockerfile (production).},label={lst:dockerfile}]
+FROM python:3.9-slim
+WORKDIR /app
+RUN apt-get update && apt-get install -y libgl1 libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY app/ ./app
+COPY model_files/ ./model_files
+EXPOSE 8000
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+\end{lstlisting}
+
+\subsection{Environment Variables}
+
+\begin{table}[H]\centering
+  \caption{Environment variables used across the three deployable tiers.}\label{tab:envvars}
+  \begin{tabularx}{\textwidth}{l l X}\toprule
+    Variable & Service & Example \\\midrule
+    \texttt{VITE\_API\_URL}  & Web      & \texttt{https://eshara-api.railway.app} \\
+    \texttt{VITE\_WS\_URL}   & Web      & \texttt{wss://eshara-api.railway.app/ws/recognize} \\
+    \texttt{JWT\_SECRET}     & Node API & 256-bit hex string \\
+    \texttt{DATABASE\_URL}   & Node API & \texttt{file:./dev.db} or Postgres URL \\
+    \texttt{MODEL\_DIR}      & FastAPI  & \texttt{/app/model\_files} \\
+    \texttt{CORS\_ORIGINS}   & FastAPI  & comma-separated origins \\\bottomrule
+  \end{tabularx}
+\end{table}

@@ -1,0 +1,152 @@
+% =============================================================================
+%  Eshara — Bilingual Sign Language Recognition System
+%  AASTMT — College of Engineering and Technology  •  B.Sc. FYP
+% -----------------------------------------------------------------------------
+%  Compile:   latexmk -pdf main.tex
+%      or:   pdflatex main && bibtex main && pdflatex main && pdflatex main
+% =============================================================================
+\documentclass[12pt,a4paper,oneside]{report}
+
+% ---- Font: Times New Roman look-alike (PostScript) --------------------------
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}                  % Times for text + math
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{microtype}
+
+% ---- Page geometry  (AASTMT spec: ~1 inch margins, A4) ----------------------
+\usepackage[a4paper,top=2.5cm,bottom=2.5cm,left=3.0cm,right=2.5cm]{geometry}
+
+% ---- Line spacing: AASTMT body = 1.5 lines ---------------------------------
+\usepackage{setspace}
+\onehalfspacing
+
+% ---- Paragraph spacing: 12pt before, no first-line indent ------------------
+\setlength{\parskip}{12pt plus 2pt minus 2pt}
+\setlength{\parindent}{0pt}
+
+% ---- Math, science, code ---------------------------------------------------
+\usepackage{amsmath,amssymb,amsfonts,mathtools}
+\usepackage{bm}
+\usepackage{siunitx}
+\usepackage{xcolor}
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue!70!black}\bfseries,
+  commentstyle=\color{green!40!black}\itshape,
+  stringstyle=\color{red!70!black},
+  showstringspaces=false,
+  breaklines=true,
+  numbers=left, numberstyle=\tiny\color{gray},
+  frame=single, framesep=3pt,
+  captionpos=b,
+  tabsize=2
+}
+
+% ---- Tables, figures, captions ---------------------------------------------
+\usepackage{graphicx}
+\graphicspath{{figures/}{../figures/}}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage[font=small,labelfont=bf,labelsep=colon]{caption}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+
+% Caption rule per AASTMT template:
+%   - Figure caption  -> below, centred, TNR bold 10pt
+%   - Table caption   -> above, left,    TNR bold 12pt
+\captionsetup[figure]{font={small,bf}, justification=centering, labelsep=period}
+\captionsetup[table] {font={small,bf}, justification=raggedright, singlelinecheck=false, labelsep=period}
+
+% ---- Equation numbering: per chapter ---------------------------------------
+\numberwithin{equation}{chapter}
+\numberwithin{figure}{chapter}
+\numberwithin{table}{chapter}
+
+% ---- Headings (Chapter / section title formatting) -------------------------
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\Large\itshape}
+  {\filcenter\chaptertitlename\ \thechapter}{12pt}
+  {\Large\bfseries\filcenter\MakeUppercase}
+\titlespacing*{\chapter}{0pt}{-12pt}{36pt}
+
+\titleformat{\section}{\normalfont\large\bfseries\MakeUppercase}{\thesection}{1em}{}
+\titlespacing*{\section}{0pt}{18pt}{12pt}
+
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+\titlespacing*{\subsection}{0pt}{12pt}{12pt}
+
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+\titlespacing*{\subsubsection}{0pt}{12pt}{12pt}
+
+% ---- Cross-references & hyperlinks ----------------------------------------
+\usepackage[hidelinks,colorlinks=false,bookmarks=true,bookmarksnumbered=true]{hyperref}
+\usepackage[capitalise,nameinlink]{cleveref}
+\Crefname{equation}{Equation}{Equations}
+\Crefname{figure}{Figure}{Figures}
+\Crefname{table}{Table}{Tables}
+\Crefname{chapter}{Chapter}{Chapters}
+\Crefname{section}{Section}{Sections}
+
+% ---- Bibliography  (IEEE-style numeric) ------------------------------------
+\usepackage[backend=bibtex,style=ieee,sorting=none,maxbibnames=99]{biblatex}
+\addbibresource{bibliography.bib}
+
+% ---- Glossary of acronyms --------------------------------------------------
+\usepackage[acronym,nonumberlist,toc]{glossaries}
+\makeglossaries
+\input{chapters/acronyms}
+
+% ---- Header / footer -------------------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\nouppercase{\leftmark}}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% =============================================================================
+%                              DOCUMENT BEGINS
+% =============================================================================
+\begin{document}
+
+% ---- Roman-numeral front matter -------------------------------------------
+\pagenumbering{roman}
+\input{chapters/00_titlepage}
+\input{chapters/00_declaration}
+\input{chapters/00_dedication}
+\input{chapters/00_acknowledgments}
+\input{chapters/00_abstract}
+
+\tableofcontents
+\listoffigures
+\listoftables
+\printglossary[type=\acronymtype,title={List of Acronyms / Abbreviations}]
+
+% ---- Main matter ----------------------------------------------------------
+\cleardoublepage
+\pagenumbering{arabic}
+
+\input{chapters/01_introduction}
+\input{chapters/02_literature_review}
+\input{chapters/03_methodology}
+\input{chapters/04_implementation}
+\input{chapters/05_results}
+\input{chapters/06_discussion}
+\input{chapters/07_conclusion}
+\input{chapters/08_future_work}
+
+% ---- Back matter ----------------------------------------------------------
+\cleardoublepage
+\printbibliography[heading=bibintoc,title={References}]
+
+\appendix
+\input{chapters/99_appendix}
+
+\end{document}

@@ -1,0 +1,7 @@
+flowchart LR
+  CAM[expo-camera] --> FR[Frame]
+  FR --> MP[MediaPipe Tasks Vision]
+  MP --> LM[Landmarks 63 or 258]
+  LM --> RT[TFLite Interpreter on-device]
+  RT --> JS[JS decoder]
+  JS --> UI[ResultOverlay]

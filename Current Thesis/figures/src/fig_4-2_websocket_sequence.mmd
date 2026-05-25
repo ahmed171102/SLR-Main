@@ -1,0 +1,17 @@
+sequenceDiagram
+  participant U as Browser
+  participant W as React Web
+  participant B as FastAPI WS
+  participant M as Models
+  U->>W: webcam frame
+  W->>W: MediaPipe Hands (in browser)
+  W->>B: {type:frame, landmarks:[63]}
+  B->>M: Mode detector
+  alt motion below threshold
+    M->>M: Letter MLP
+  else motion above threshold
+    M->>M: 30-frame buffer to Word BiLSTM
+  end
+  M->>B: prediction
+  B-->>W: {type:prediction, label, conf}
+  W->>U: render prediction

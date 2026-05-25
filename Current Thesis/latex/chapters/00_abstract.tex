@@ -1,0 +1,44 @@
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+Hearing impairment affects an estimated 466~million people worldwide and
+approximately 7~million in the Arab region, yet automatic \gls{slr}
+research is dominated by \gls{asl}, leaving \gls{arsl} users underserved.
+This project, \emph{Eshara}, presents a bilingual \gls{slr} system that
+recognises both \gls{asl} and \gls{arsl} at two granularity levels --- individual
+letters and isolated words --- and delivers them as a deployable cross-platform
+product.
+
+Four deep-learning models were designed and trained: (i)~a 63-feature
+\gls{mlp} for \gls{asl} letters trained on the 87~k-image ASL~Alphabet dataset;
+(ii)~a parallel \gls{mlp} for \gls{arsl} letters trained on the ArASL2018
+corpus; (iii)~a 30-frame \gls{bilstm} with a custom \emph{temporal attention}
+layer for 157~\gls{asl} words from a unified \gls{wlasl}-derived corpus; and
+(iv)~an \emph{ArSL~Word~v2} model --- a TimeDistributed spatial encoder
+followed by two stacked \gls{bilstm}s, a final \gls{lstm}, and a deep
+classifier head --- trained on a 48-frame, 258-dimensional pose-and-hands
+representation of the \gls{karsl}-502 Arabic word dataset. Inputs are
+extracted in real time from a single RGB camera using Google MediaPipe.
+
+The models are exposed through a unified FastAPI inference service with
+both \gls{rest} and \gls{ws} endpoints, fronted by a React~+~TypeScript
+web application that performs MediaPipe hand detection in the browser,
+and by a React-Native (Expo) mobile application that runs quantised
+\gls{tflite} versions of the models on-device for offline use. A Node.js
++~Prisma layer handles authentication, user profiles, and chat. The
+system is containerised with Docker and deployed to Railway and Vercel.
+
+Across the four tasks, the system achieves \textbf{XX.X\,\%} top-1 letter
+accuracy (\gls{asl}), \textbf{XX.X\,\%} top-1 letter accuracy (\gls{arsl}),
+\textbf{XX.X\,\%} top-1~/~\textbf{XX.X\,\%} top-5 word accuracy (\gls{asl}),
+and \textbf{XX.X\,\%} top-1~/~\textbf{XX.X\,\%} top-5 word accuracy (\gls{arsl}),
+with an end-to-end browser latency below \textbf{150\,ms}. Ablation studies
+confirm the benefit of the 258-dimensional pose-and-hand feature vector and
+the temporal-attention mechanism. Applications include assistive
+communication, special-needs education, telemedicine, and public-service
+kiosks.
+
+\vspace{12pt}
+\noindent\textbf{Keywords:} sign-language recognition; Arabic sign language;
+deep learning; BiLSTM; temporal attention; MediaPipe; FastAPI;
+React Native; TensorFlow Lite.
