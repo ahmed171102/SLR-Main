@@ -1,0 +1,377 @@
+%----------------------------------------------------------------------------------------------------
+%   AAST, Computer Engineering Department LaTEX template
+%   Use this template as a base to help you write your thesis (MSc and Phd) 
+%   or your graduation project (BSc) documentation.
+%
+%   This version is created on the 5th of May, 2023
+%   Build this template using LuaLatex engine
+% 
+%   Class File Version 1.0 (4/5/23)
+%
+%   The department LaTEX transformation project is currently maintained (as per LPPL v1.3c) by: -
+% 
+%   Sherif Fadel, PhD
+%   Noureldin S. Eissa, PhD
+%
+%   Copyrights(c) AASTMT, Sheraton, Cairo, Computer Engineering Dept.
+%
+%   Class license:
+%   LPPL v1.3c (http://www.latex-project.org/lppl)
+%   All modified components must be identified "clearly and unambiguously", and must be declared as 
+%   modified versions, both in the source and also when called in some sort of interactive mode. 
+%   This is a requirement of LPPL v1.3c
+%
+%----------------------------------------------------------------------------------------------------
+
+
+
+%------------------------------------------------------------------------ 
+% Template setup
+% DO NOT MODIFY any of the following parameters
+%------------------------------------------------------------------------ 
+
+\documentclass[
+12pt,
+oneside, 
+onehalfspacing, 
+nolistspacing, 
+parskip, 
+chapterinoneline, 
+]{AASTCOMPUTER} 
+
+\usepackage{fontspec}
+\setmainfont{times}[
+  Extension      = .ttf ,
+  BoldFont       = *bd ,
+  ItalicFont     = *i ,
+  BoldItalicFont = *bi
+]
+\newfontfamily\arabicfont
+    [Script=Arabic,     
+    Scale=1.2]          
+        {Arial}  
+
+\newcommand{\textarabic}[1]    
+    {\bgroup\textdir TRT\arabicfont{#1}\egroup}
+\newcommand{\n}         [1]    
+    {\bgroup\textdir TLT #1\egroup}
+\newcommand{\afootnote} [1]     
+    {\footnote{\textarabic{#1}}}
+\newenvironment{Arabic}    
+    {\textdir TRT\pardir TRT\arabicfont}{}
+
+\usepackage{tikz}
+\usepackage{datetime}
+
+\geometry{
+	paper=a4paper, 
+	left=3.0cm, 
+	right=2.0cm,
+	top=2.5cm, 
+	bottom=2.5cm,
+}
+
+\addbibresource{references.bib} 
+
+%------------------------------------------------------------------------ 
+% MODIFY the upcoming sections based on your requirements
+%------------------------------------------------------------------------ 
+
+%------------------------------------------------------------------------ 
+% Type of Degree (BSc, MSs or PhD)
+%------------------------------------------------------------------------
+% 1: MSc
+% 2: PhD
+% 3: BSc (Graduation Project)
+\degree{1} 
+
+%------------------------------------------------------------------------ 
+% Thesis Title in English
+%------------------------------------------------------------------------ 
+\thesistitle{The title of your thesis or project documentation} 
+
+%------------------------------------------------------------------------ 
+% Thesis Title in Arabic
+%------------------------------------------------------------------------ 
+\arabicthesistitle{\begin{Arabic}موضـــــــــــــــــــــــــــــــــــــــــــــــــوع الرسالـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــة\end{Arabic}} 
+
+%------------------------------------------------------------------------ 
+% The number of supervisors (MAX is 3)
+%------------------------------------------------------------------------ 
+\numberofsupervisors{2}
+
+%------------------------------------------------------------------------ 
+% Information regarding your supervisors
+%------------------------------------------------------------------------ 
+%Supervisor 1 name
+\supervisor{Dr. First Supervisor Name}  
+\arabicsupervisor{\begin{Arabic}د. اسم المشرف الأول\end{Arabic}}
+%Supervisor 1 specialization
+\supervisorspeciality{Professor of Computer Engineering}
+\arabicsupervisorspeciality{\begin{Arabic}استاذ هندسة الحاسبات\end{Arabic}}
+%Supervisor 1 university
+\supervisoruniversity{Arab Academy for Science, Technology and Maritime Transport} 
+\arabicsupervisoruniversity{\begin{Arabic}الاكاديميه العربيه للعلوم و التكنولوجيا\end{Arabic}}
+
+%Supervisor 2 name
+\supervisortwo{Dr. Second Supervisor Name} 
+\arabicsupervisortwo{\begin{Arabic}د. اسم المشرف الثاني\end{Arabic}}
+%Supervisor 2 specialization
+\supervisortwospeciality{Professor of Computer Engineering}
+\arabicsupervisortwospeciality{\begin{Arabic}استاذ هندسة الحاسبات\end{Arabic}}
+%Supervisor 2 university
+\supervisortwouniversity{Arab Academy for Science, Technology and Maritime Transport}
+\arabicsupervisortwouniversity{\begin{Arabic}الاكاديميه العربيه للعلوم و التكنولوجيا\end{Arabic}}
+
+%Supervisor 3 name
+\supervisorthree{Dr. Supervisor Three Name}
+\arabicsupervisorthree{\begin{Arabic}د. اسم المشرف الثالث\end{Arabic}}
+%Supervisor 3 specialization
+\supervisorthreespeciality{Networks}
+\arabicsupervisorthreespeciality{\begin{Arabic}استاذ هندسة الحاسبات\end{Arabic}}
+%Supervisor 3 university
+\supervisorthreeuniversity{Arab Academy for Science, Technology and Maritime Transport}
+\arabicsupervisorthreeuniversity{\begin{Arabic}الاكاديميه العربيه للعلوم و التكنولوجيا\end{Arabic}}
+
+%------------------------------------------------------------------------ 
+% Number of Examiners (MAX is 3)
+%------------------------------------------------------------------------ 
+\numberofexaminers{2}
+
+%------------------------------------------------------------------------ 
+% Information regarding your examiners
+%------------------------------------------------------------------------ 
+% Examiner 1 name
+\examiner{Prof. First Examiner Name} 
+\arabicexaminer{\begin{Arabic}د. اسم الممتحن الاول\end{Arabic}}  
+% Examiner 1 university
+\examineruniversity{AASTMT, Cairo}
+\arabicexamineruniversity{\begin{Arabic}الاكاديميه العربيه للعلوم و التكنولوجيا\end{Arabic}}
+
+% Examiner 2 name
+\examinertwo{Dr. Second Examiner Name} 
+\arabicexaminertwo{\begin{Arabic}د. اسم الممتحن الثاني\end{Arabic}} 
+% Examiner 2 university
+\examinertwouniversity{AASTMT, Cairo}
+\arabicexaminertwouniversity{\begin{Arabic}الاكاديميه العربيه للعلوم و التكنولوجيا\end{Arabic}}
+
+% Examiner 3 name
+\examinerthree{Dr. Third Examiner Name} 
+\arabicexaminerthree{\begin{Arabic}د. اسم الممتحن الثالث\end{Arabic}} 
+% Examiner 3 university
+\examinerthreeuniversity{AASTMT, Cairo}
+\arabicexaminerthreeuniversity{\begin{Arabic}الاكاديميه العربيه للعلوم و التكنولوجيا\end{Arabic}}
+
+%------------------------------------------------------------------------ 
+% Number of students (MAX is 1 student for postgrduate studies (MSc or PhD) 
+% and 6 students for BSc graduation project).
+%------------------------------------------------------------------------ 
+\numberofstudents{1}
+
+% Student 1 name
+\author{Student Name} 
+\arabicauthor{\begin{Arabic}اسم الطالب\end{Arabic}} %Only required for postgraduate studies (MSc and PhD)
+
+% Student 2 name
+\authortwo{Second Student Name} 
+
+% Student 3 name
+\authorthree{Third Student Name} 
+
+% Student 4 name
+\authorfour{Fourth Student Name} 
+
+% Student 5 name
+\authorfive{Fifth Student Name} 
+
+% Student 6 name
+\authorsix{Sixth Student Name}
+
+
+%------------------------------------------------------------------------ 
+% BEGINNING OF THE DOCUMENT
+%------------------------------------------------------------------------ 
+
+%-----------------------DO NOT MODIFY THIS SECTION-----------------------
+\begin{document}
+\frontmatter 
+\pagestyle{plain} 
+%------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE (DO NOT MODIFY)
+%----------------------------------------------------------------------------------------
+\titlep
+
+%----------------------------------------------------------------------------------------
+%	DECLARATION PAGE (DO NOT MODIFY)
+%----------------------------------------------------------------------------------------
+\declarationp
+
+%----------------------------------------------------------------------------------------
+%	EXAMINERS PAGE (APPROVAL) (DO NOT MODIFY)
+%----------------------------------------------------------------------------------------
+\examinersp
+
+%----------------------------------------------------------------------------------------
+%	DEDICATION PAGE (optional) (MODIFY AS DESIRED)
+%----------------------------------------------------------------------------------------
+\dedicationp{Dedicated to\ldots} 
+
+%----------------------------------------------------------------------------------------
+%	ACKNOWLEDGMENTS PAGE (optional) (MODIFY AS DESIRED)
+%----------------------------------------------------------------------------------------
+\begin{acknowledgmentsp}
+The acknowledgments and the people to thank go here, don't forget to include your project advisor\ldots
+\end{acknowledgmentsp}
+
+%-----------------------DO NOT MODIFY THIS SECTION-----------------------
+\cleardoublepage
+%------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT PAGE (MODIFY AS DESIRED)
+%----------------------------------------------------------------------------------------
+
+\begin{abstractp}
+The Thesis Abstract is written here (and usually kept to just this page). The report must begin with a one- to two-paragraph abstract (200 – 250 words) that orients the reader as to the contents as well as to the major sections of the report. The abstract, by itself, must provide enough information about the project so that the reader can judge simply by reading this portion if he or she wants to read further.
+\end{abstractp}
+
+%-----------------------DO NOT MODIFY THIS SECTION-----------------------
+\clearpage
+\tableofcontents 
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Figures} 
+\listoffigures
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Tables} 
+\listoftables
+\cleardoublepage
+%------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	ABBREVIATIONS/ACRONYMS PAGE (MODIFY AS DESIRED)
+%----------------------------------------------------------------------------------------
+\listofabbre
+\addabbre{CNN}{Convolution Neural Network}
+
+%-----------------------DO NOT MODIFY THIS SECTION-----------------------
+\mainmatter 
+\pagestyle{thesis} 
+%------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	THESIS CONTENT(MODIFY AS DESIRED)
+%----------------------------------------------------------------------------------------
+\chapter{Introduction}
+All figures, such as Figure~\ref{fig:aast50} must be referenced in the body of text before showing them.
+\section{First section inside the first chapter}
+
+% Random lipsum text. Replace with the actual thesis contents.
+\lipsum[1]
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.5]{Figures/aast.jpg}
+\caption[AAST Logo]{This figure represents the 50th year anniversary logo}
+\label{fig:aast50}
+\end{figure}
+
+\subsection{Subsection inside the first section}
+\lipsum[3]
+
+\subsection{Second subsection inside the first section}
+\lipsum[4]
+
+\subsubsection{Sub-Subsection inside the second subsection}
+\lipsum[2]
+
+\section{Second section inside the first chapter}
+\lipsum[6-7]
+
+\chapter{Related Work}
+Make sure you include proper citations and references for your work, and avoid plagiarism. This document should be based on your own work and in case of using any parts or copying any information, figures or diagrams from previous work, it should be properly referenced. 
+
+Each reference number should be enclosed by square brackets. In text, citations of references may be simply written as \textit{"in [1]"} rather than as \textit{"in reference [1]”}.
+
+For example, \cite{Sarker2021} is a reference for an article that reviews deep learning techniques. You can cite other types of publications as well, such as books~\cite{book1} or conference proceedings~\cite{conference1}.
+
+\lipsum[5]
+All tables, such as Table~\ref{tab:randomTable} must also appear in the body of text before showing them.
+
+\begin{table}[!ht]
+\caption{An example table showing random values.}
+\label{tab:randomTable}
+\centering
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\textbf{Value 1} & \textbf{Value 2} & \textbf{Value 3} & \textbf{Value 4} & \textbf{Value 5} & \textbf{Value 6} \\
+\hline
+1.5 & 0.1 & 0.2 & 3.2 & 1.2 & 2.54\\
+\hline
+2.2 & 0.17 & 0.4 & 1.1 & 4.4 & 1.7\\
+\hline
+3.1 & 0.24 & 0.5 & 8.7 & 2.1 & 3.3\\
+\hline
+2.9 & 0.72 & 0.8 & 6.6 & 2.2 & 3.1\\
+\hline
+\end{tabular}
+\end{table}
+Below is an example of equations. You must refer to all equations in the body of text before writing them. As an example, Einstein's energy matter is shown in Equation~(\ref{eqn:EinsteinEquation}) below.  
+\begin{equation}
+E = mc^{2}
+\label{eqn:EinsteinEquation}
+\end{equation}
+
+\section{A section inside the second chapter}
+\lipsum[8]
+
+\subsection{Subsection inside the first section of the second chapter}
+\lipsum[9-11]
+
+%----------------------------------------------------------------------------------------
+%	REFERENCES TABLE (DO NOT MODIFY)
+%----------------------------------------------------------------------------------------
+\listreferences
+
+%----------------------------------------------------------------------------------------
+%	LIST OF PUBLICATIONS (optional for BSc Graduation Project) (MODIFY AS DESIRED)
+%----------------------------------------------------------------------------------------
+\begin{listofpublicationsp}
+Put a list of your publications here.
+\end{listofpublicationsp}
+
+
+%----------------------------------------------------------------------------------------
+%	APPENDICES START HERE (MODIFY AS DESIRED)
+%----------------------------------------------------------------------------------------
+\appendixstart 
+\chapter{First Appendix}
+
+%----------------------------------------------------------------------------------------
+%	ARABIC ABSTRACT (MODIFY AS DESIRED)
+%----------------------------------------------------------------------------------------
+\begin{arabicabstractp}
+\begin{Arabic}
+الملخص العربي
+\end{Arabic}
+\end{arabicabstractp}
+
+%----------------------------------------------------------------------------------------
+%	(DO NOT MODIFY)
+%	ARABIC EXAMINERS PAGE (only for MSc and PhD)
+%	DO NOT INCLUDE FOR BSc Graduation Project 
+%----------------------------------------------------------------------------------------
+\arabicexaminersp
+
+%----------------------------------------------------------------------------------------
+%	(DO NOT MODIFY)	
+%	ARABIC TITLE PAGE (only for MSc and PhD)
+%	DO NOT INCLUDE FOR BSc Graduation Project
+%----------------------------------------------------------------------------------------
+\arabictitlep
+
+\end{document}  

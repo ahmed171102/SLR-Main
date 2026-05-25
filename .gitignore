@@ -28,11 +28,13 @@ yarn-error.log
 dist/
 build/
 
-# Large Files & Datasets (Git LFS recommended for these)
+# Large Files & Datasets (keep local; use Git LFS or external storage to share)
+*.rar
+Words/ArSL Word (Arabic)/arsl_word_sequences.npz
+Words/ArSL Word (Arabic)/arsl_word_sequences_v2.npz
 # *.h5
 # *.tflite
 # *.csv
-# *.rar
 # *.zip
 # *.mp4
 # *.avi

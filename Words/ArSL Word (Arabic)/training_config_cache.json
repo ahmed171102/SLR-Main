@@ -1,0 +1,8 @@
+{
+    "LANGUAGE": "arsl",
+    "DATASET_TYPE": "folder_classid",
+    "FEATURES_PER_FRAME": 258,
+    "VIDEOS_DIR": "E:/Downloads/Arabic Words Dataset",
+    "WORK_DIR": "M:/Term 10/Grad/SLR Main/Words/ArSL Word (Arabic)",
+    "VOCAB_CSV": "M:/Term 10/Grad/SLR Main/Words/ArSL Word (Arabic)/KARSL-502_Labels.xlsx"
+}

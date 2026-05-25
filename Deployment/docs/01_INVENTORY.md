@@ -75,6 +75,36 @@ class TemporalAttention(tf.keras.layers.Layer):
         e = tf.nn.tanh(tf.matmul(x, self.W) + self.b)
         a = tf.nn.softmax(e, axis=1)
         return tf.reduce_sum(x * a, axis=1)
+import tensorflow as tf
+from tensorflow.keras.layers import Layer
+from tensorflow.keras.initializers import GlorotUniform, Zeros
+from tensorflow.keras import backend as K
+
+class TemporalAttention(Layer):
+    """
+    A custom Keras layer that applies temporal attention to sequence data.
+    It computes attention weights over the time dimension of the input sequence
+    and returns a context vector, which is a weighted sum of the input features.
+    """
+    def build(self, input_shape: tf.TensorShape) -> None:
+        """
+        Builds the attention mechanism's weights and biases.
+        input_shape: Shape of the input tensor (batch_size, timesteps, features).
+        """
+        self.W = self.add_weight('att_weight', shape=(input_shape[-1], 1), initializer=GlorotUniform())
+        self.b = self.add_weight('att_bias', shape=(input_shape, 1), initializer=Zeros())
+        super(TemporalAttention, self).build(input_shape)
+
+    def call(self, x: tf.Tensor) -> tf.Tensor:
+        """
+        Applies the attention mechanism to the input tensor.
+        x: Input tensor of shape (batch_size, timesteps, features).
+        Returns: Context vector of shape (batch_size, features).
+        """
+        e = K.tanh(K.dot(x, self.W) + self.b)
+        a = K.softmax(e, axis=1)
+        output = K.sum(x * a, axis=1)
+        return output
 ```
 
 ---

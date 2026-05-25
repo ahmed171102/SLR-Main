@@ -1,0 +1,194 @@
+* {
+        font-family: Roboto;
+}
+
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color:#1E1E1E;
+    fill-opacity: 70%;
+    margin:0;
+    min-height: 100vh;
+
+}
+
+.header {
+    display: flex;
+    height: 97px;
+    background-color: #0F1214B3;
+    justify-content: space-between  ;
+    align-items: center;
+    width: 100vw; 
+
+}
+
+.header .links {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.nav-link{
+    color: #E5E7EB;
+    font-size: 18   px;
+    font-weight: 500;
+    text-decoration: none;
+    margin-left: 42px;
+    margin-left: 42px;
+    font-style: bold;
+    
+}
+
+.nav-link.active {
+    text-decoration: underline;
+    color: #A8C8FF;
+    font-style: bold;
+
+    text-decoration-thickness: 3px; 
+
+    text-underline-offset: 8px;
+}
+
+.header .logo {
+    color: #A8C8FF;
+    font-size: 38px;
+    font-weight: 300;
+}
+
+.header .logo .logo-sub {
+    font-size: 18px;     
+    opacity: 0.8;        
+    font-weight: 200;    
+}
+
+.header .left-section ,.header .right-section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between  ;
+    align-items: center;
+
+
+}
+
+.header .left-section {
+    width: 600px;
+    height: 32px;
+    display: flex;
+    margin-left: 30px;
+}
+
+.header .right-section {
+    width: 243.48px;
+    height: 42px;
+    margin-right: 30px;
+}
+
+.header img {
+    width: 20px;
+    height: 20px;
+}
+
+#login-button {
+    background-color: #A8C8FF;
+    border-radius: 30px;
+    width: 115px;
+    height: 44px;
+}
+
+#settings-button ,#language-button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.header .right-section button img {
+    filter: brightness(0) invert(1); /* Turns the icon pure white */
+    width: 24px;  /* Adjust size as needed */
+    height: 24px;
+}
+
+.main-content{
+    flex: 1;
+}
+
+.footer {
+    height: 189px;
+    width: 100vw;
+    background-color: #0B0F12;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.footer-content {
+    background-color: transparent;
+    height: 85px;
+    width: 90vw;
+    margin: 64px 32px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Manrope;
+    font-size: 14px;
+    color: #C3C6D2 ;
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 33%;
+    height: 100%;
+    font-size: 12px;
+    
+}
+
+.footer-section ul {
+    margin-left: 0;
+    padding-left: 0;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 0;
+
+}
+.team-section li {
+    flex: 0 0 calc(50% - 5px);
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.footer-subtitle{
+    margin:0;
+    font-family: Manrope;
+    color: #8D919B;
+    font-size: 12px;
+    letter-spacing: 2.4px;
+    font-weight: 500;
+}
+
+.footer .logo {
+    font-family: 'Plus Jakarta Sans';
+    font-size: 20px;
+    color: #A8C8FF;
+    margin: 0;
+    font-weight: bold;
+}
+
+.title-section p {
+    max-width: 75%;
+}
+
+.resources-section li {
+    color: #C3C6D2;
+    margin-right:10px;
+    font-weight: 900px;
+    
+}

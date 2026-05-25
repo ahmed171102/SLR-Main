@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String       @id @default(cuid())
+  name         String
+  email        String       @unique
+  passwordHash String
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  memberships  RoomMember[]
+  messages     Message[]
+}
+
+model Room {
+  id        String       @id @default(cuid())
+  type      RoomType     @default(DIRECT)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  members   RoomMember[]
+  messages  Message[]
+}
+
+model RoomMember {
+  id       String @id @default(cuid())
+  roomId   String
+  userId   String
+  joinedAt DateTime @default(now())
+  room     Room   @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([roomId, userId])
+}
+
+model Message {
+  id          String      @id @default(cuid())
+  roomId      String
+  senderId    String
+  content     String
+  contentType MessageType @default(TEXT)
+  createdAt   DateTime    @default(now())
+  room        Room        @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  sender      User        @relation(fields: [senderId], references: [id], onDelete: Cascade)
+}
+
+enum RoomType {
+  DIRECT
+  GROUP
+}
+
+enum MessageType {
+  TEXT
+  PREDICTION
+  SYSTEM
+}
