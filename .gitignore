@@ -32,6 +32,9 @@ build/
 *.rar
 Words/ArSL Word (Arabic)/arsl_word_sequences.npz
 Words/ArSL Word (Arabic)/arsl_word_sequences_v2.npz
+Words/ArSL Word (Arabic)/arsl_word_sequences_v2_partial.npz
+Words/ArSL Word (Arabic)/arsl_word_sequences_v2_full.npz
+Words/ArSL Word (Arabic)/_archive/
 # *.h5
 # *.tflite
 # *.csv
