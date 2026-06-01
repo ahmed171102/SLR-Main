@@ -34,7 +34,10 @@ Words/ArSL Word (Arabic)/arsl_word_sequences.npz
 Words/ArSL Word (Arabic)/arsl_word_sequences_v2.npz
 Words/ArSL Word (Arabic)/arsl_word_sequences_v2_partial.npz
 Words/ArSL Word (Arabic)/arsl_word_sequences_v2_full.npz
+Words/ArSL Word (Arabic)/arsl_graduation_sequences.npz
+Words/ArSL Word (Arabic)/arsl_custom_subset.npz
 Words/ArSL Word (Arabic)/_archive/
+Words/ArSL Word (Arabic)/backup custom/
 # *.h5
 # *.tflite
 # *.csv

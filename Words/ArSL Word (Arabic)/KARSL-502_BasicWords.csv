@@ -1,44 +1,132 @@
-class_id,sign_id,english,category
-290,289,welcome,greeting
-291,290,greeting,greeting
-293,292,here you are,greeting
-294,293,thanks,greeting
-295,294,friend,social
-296,295,guest,social
-299,298,gift,social
-286,285,here,location
-287,286,there,location
-288,287,left,location
-289,288,right,location
-193,192,family,family
-196,195,father,family
-197,196,mother,family
-198,197,sister,family
-199,198,brother,family
-217,216,son,family
-218,217,daughter,family
-224,223,child,family
-219,218,people,family
-161,160,eat,verb
-162,161,drink,verb
-163,162,sleep,verb
-164,163,wake up,verb
-165,164,hear,verb
-174,173,walk,verb
-175,174,love,verb
-183,182,help,verb
-192,191,enter,verb
-190,189,stand,verb
-181,180,think,verb
-170,169,open,verb
-171,170,close,verb
-239,238,happy,emotion
-240,239,sad,emotion
-256,255,tired,emotion
-300,299,house,home
-302,301,door,home
-304,303,room,home
-328,327,chair,home
-376,375,Good,misc
-492,491,teacher,profession
-497,496,doctor,profession
+sign_id,category,class_id,english,arabic,is_number,is_letter
+224,adjective,225,beautiful,????,False,False
+226,adjective,227,long,????,False,False
+227,adjective,228,short,????,False,False
+229,adjective,230,fat,????,False,False
+231,adjective,232,poor,????,False,False
+272,adjective,273,intelligent,???,False,False
+273,direction,274,in front of,????,False,False
+275,direction,276,far,????,False,False
+279,direction,280,outside,????,False,False
+281,direction,282,inside,????,False,False
+282,direction,283,up,???,False,False
+283,direction,284,near,????,False,False
+285,direction,286,here,???,False,False
+286,direction,287,there,????,False,False
+287,direction,288,left,????,False,False
+288,direction,289,right,????,False,False
+234,emotion,235,confused,?????,False,False
+235,emotion,236,worried,???,False,False
+237,emotion,238,afraid,????,False,False
+238,emotion,239,happy,???? (?????),False,False
+239,emotion,240,sad,????,False,False
+240,emotion,241,courageous,????,False,False
+247,emotion,248,generous,????,False,False
+254,emotion,255,feeling,????,False,False
+255,emotion,256,tired,???,False,False
+256,emotion,257,crying,????,False,False
+265,emotion,266,patient,???,False,False
+192,family,193,family,????,False,False
+193,family,194,grandmother,???,False,False
+194,family,195,grandfather,??,False,False
+195,family,196,father,??,False,False
+196,family,197,mother,??,False,False
+197,family,198,sister,???,False,False
+198,family,199,brother,??,False,False
+199,family,200,girl,???,False,False
+200,family,201,baby,????,False,False
+209,family,210,uncle,??,False,False
+210,family,211,aunt,???,False,False
+216,family,217,son,???,False,False
+217,family,218,daughter,????,False,False
+223,family,224,child,???,False,False
+289,greeting,290,welcome,???? ??????,False,False
+290,greeting,291,greeting,?????? ?????,False,False
+291,greeting,292,here you are,????,False,False
+292,greeting,293,neighbor,???,False,False
+293,greeting,294,thanks,?????,False,False
+294,greeting,295,friend,????,False,False
+295,greeting,296,guest,???,False,False
+297,greeting,298,fault,???,False,False
+298,greeting,299,gift,????,False,False
+375,greeting,376,Good,???,False,False
+92,health,93,hospital,??????,False,False
+100,health,101,pharmacy,??????,False,False
+113,health,114,cold,????,False,False
+115,health,116,headache,????,False,False
+116,health,117,pain,???,False,False
+117,health,118,fever,???,False,False
+132,health,133,medicine,????,False,False
+134,health,135,sick,???? / ???,False,False
+497,health,498,doctor,????,False,False
+498,health,499,nurse,?????,False,False
+299,home,300,house,???,False,False
+302,home,303,door,???,False,False
+303,home,304,window,????,False,False
+304,home,305,room,????,False,False
+306,home,307,bed,????,False,False
+312,home,313,kitchen,????,False,False
+321,home,322,cup,??? ( ???),False,False
+325,home,326,table,?????,False,False
+328,home,329,chair,????,False,False
+336,home,337,television,??????? (?????),False,False
+341,home,342,telephone,???? ( ?????),False,False
+346,home,347,key,?????,False,False
+1,number,2,0,0,True,False
+2,number,3,1,1,True,False
+3,number,4,2,2,True,False
+4,number,5,3,3,True,False
+5,number,6,4,4,True,False
+6,number,7,5,5,True,False
+7,number,8,6,6,True,False
+8,number,9,7,7,True,False
+9,number,10,8,8,True,False
+10,number,11,9,9,True,False
+11,number,12,10,10,True,False
+12,number,13,20,20,True,False
+13,number,14,30,30,True,False
+14,number,15,40,40,True,False
+15,number,16,50,50,True,False
+16,number,17,60,60,True,False
+17,number,18,70,70,True,False
+18,number,19,80,80,True,False
+19,number,20,90,90,True,False
+20,number,21,100,100,True,False
+21,number,22,200,200,True,False
+22,number,23,300,300,True,False
+23,number,24,400,400,True,False
+24,number,25,500,500,True,False
+25,number,26,600,600,True,False
+26,number,27,700,700,True,False
+27,number,28,800,800,True,False
+28,number,29,900,900,True,False
+29,number,30,1000,1000,True,False
+30,number,31,1000000,1000000,True,False
+31,number,32,10000000,10000000,True,False
+202,people,203,man,???,False,False
+203,people,204,young man,???,False,False
+204,people,205,young woman,????,False,False
+218,people,219,people,???,False,False
+468,profession,469,Sign language translator,????? ??? ???????,False,False
+484,profession,485,policeman,????,False,False
+486,profession,487,soldier,????,False,False
+491,profession,492,teacher,???? / ????,False,False
+492,profession,493,chef,????,False,False
+500,profession,501,lawyer,????,False,False
+160,verb,161,eat,????,False,False
+161,verb,162,drink,????,False,False
+162,verb,163,sleep,????,False,False
+163,verb,164,wake up,??????,False,False
+164,verb,165,hear,????,False,False
+165,verb,166,silence,????,False,False
+169,verb,170,open,????,False,False
+170,verb,171,close,???? ( ???? ),False,False
+173,verb,174,walk,????,False,False
+174,verb,175,love,???,False,False
+175,verb,176,hate,????,False,False
+181,verb,182,think,????,False,False
+182,verb,183,help,?????,False,False
+185,verb,186,choose,?????,False,False
+186,verb,187,call,?????,False,False
+189,verb,190,stand,???,False,False
+191,verb,192,enter,????,False,False

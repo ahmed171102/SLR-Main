@@ -1,0 +1,2 @@
+timestamp,test_top1_accuracy,macro_f1,num_classes,num_test_samples,test_top5_accuracy,test_weighted_f1,best_val_accuracy,graduation_expected,graduation_found,split_strategy
+2026-05-31 20:13:49,0.9664,0.9666,131,1189,0.984,0.966,0.9546,131,131,block_holdout
