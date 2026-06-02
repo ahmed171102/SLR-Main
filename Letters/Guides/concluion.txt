@@ -1,2 +1,0 @@
-Medipipe file - Medipipe.ipynb
-mobilenet file - mobilenet_training.ipynb
