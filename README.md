@@ -2,14 +2,14 @@
 
 ## Project Overview
 
-This repository contains the complete codebase and documentation for a **Sign Language Recognition (SLR)** system capable of recognizing both **American Sign Language (ASL)** and **Arabic Sign Language (ArSL)**.
+This repository contains the complete codebase and documentation for a **Sign Language Recognition (SLR)** system capable of recognizing both **American Sign Language (ASL)** and **Arabic Sign Language (ArSL)** in real-time.
 
-The project leverages state-of-the-art machine learning models, including **MediaPipe** for pose estimation and **Transfer Learning** with MobileNetV2, to achieve real-time recognition of letters and words.
+The project leverages state-of-the-art machine learning models, including **MediaPipe** for pose estimation and **Transfer Learning** with MobileNetV2, to achieve real-time recognition of letters and words across multiple languages.
 
 ### Key Features
 - **Real-time Letter Recognition**: Using MediaPipe landmarks and MLP classifiers.
 - **Word Recognition**: Temporal sequence modeling with BiLSTM and custom attention mechanisms.
-- **Multi-Language Support**: English (ASL) a Arabic (ArSL).
+- **Multi-Language Support**: English (ASL) and Arabic (ArSL).
 - **Deployment Ready**: Detailed guides for Backend (FastAPI), Web Frontend (React), and Mobile (React Native).
 
 ## 📂 Repository Structure
@@ -23,6 +23,7 @@ The repository is organized as follows:
 
 - **`Words/`**:
   - `ASL Word (English)/`: Word-level recognition models (BiLSTM).
+  - `ArSL Word (Arabic)/`: Word-level recognition models for Arabic sign language.
   - `Shared/`: Vocabulary and index mappings.
 
 - **`Deployment/`**:
@@ -41,8 +42,8 @@ Ensure you have Python 3.8+ installed.
 
 1.  **Clone the repository**:
     ```bash
-    git clone https://github.com/your-username/slr-main.git
-    cd slr-main
+    git clone https://github.com/ahmed171102/SLR-Main.git
+    cd SLR-Main
     ```
 
 2.  **Install Dependencies**:
@@ -52,7 +53,7 @@ Ensure you have Python 3.8+ installed.
 
 ### Running the Notebooks
 
-Navigate to `Letters/Orignal Notebooks` or specific language folders to run Jupyter notebooks:
+Navigate to `Letters/Original Notebooks` or specific language folders to run Jupyter notebooks:
 
 ```bash
 jupyter notebook
@@ -61,6 +62,7 @@ jupyter notebook
 **Key Notebooks:**
 - `Letters/ASL Letter (English)/Combined_Architecture.ipynb`: Real-time ASL letter testing.
 - `Letters/ASL Letter (English)/Mediapipe_Training.ipynb`: MLP training pipeline.
+- `Words/ArSL Word (Arabic)/ArSL_Word_Training_CustomWords.ipynb`: Arabic word recognition (131 classes, graduation project).
 
 ## 🛠️ Deployment Plan
 
